@@ -194,12 +194,7 @@
                                     <label class="form-label bold mt-2" for="loginNumber" style="padding-right: 1em">
                                         رقم بطاقة التعريف الوطنية
                                     </label>
-                                    <input class="form-control" formControlName="loginNumber" id="loginNumber"
-                                           type="text">
-                                    <label class="form-label bold mt-2" for="cin" style="padding-right: 1em">
-                                        رقم بطاقة التعريف الوطنية
-                                    </label>
-                                    <input class="form-control" formControlName="cin" id="cin" type="text">
+                                    <input class="form-control" formControlName="loginNumber" id="loginNumber" type="text">
                                     <div class="mb-3 border-1">
                                         <label class="form-label bold mt-2" for="password" style="padding-right: 1em">كلمة
                                             السر</label>
@@ -209,7 +204,6 @@
                                             <button (click)="showOrHidePassword($event)"
                                                     class="input-group-text bg-transparent border-0">
                                                 <em class="material-icons">{{shown ? 'visibility' : 'visibility_off'}}</em>
-                                                <em class="material-icons">{{shown ? 'visibility': 'visibility_off'}}</em>
                                             </button>
                                             <button (click)="login($event)" [disabled]="signInGroup.invalid"
                                                     class="btn btn-primary w-100 text-center mt-3" id="success"

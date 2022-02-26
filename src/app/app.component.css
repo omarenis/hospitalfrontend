@@ -1,0 +1,40 @@
+.navbar{
+    background-color: rgba(19, 51, 148, 0.85);
+    height: 40px;
+    background-color: #2d499d;
+}
+.mobile-version{
+    height: 100%;
+}
+.logo{
+    width: 100px;
+    height: 40px;
+}
+.custom-bg{
+    background-color: #2d499d;
+}
+
+.customHover:hover {
+    background-color: #0aa005;
+}
+.align-effect::after {
+    content: "";
+    text-align: center;
+    display: block;
+    width: 100%;
+    height: 1px;
+    position: center;
+    background: white;
+    transform: scale(0);
+    transition: transform 0.2s ease-in-out;
+}
+
+.align-effect:hover::after {
+    transform: scale(1);
+}
+
+@media (min-width: 1200px) and (max-width: 1400px) {
+    .navbar-collapse .nav-link {
+        font-size: 18px;
+    }
+}

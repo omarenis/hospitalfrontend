@@ -34,7 +34,8 @@ import {IsdoctorGuard} from './authguard/is-doctor.guard';
 import {NotfoundComponent} from './screens/notfound/notfound.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthenticationInterceptor} from './interceptors/authentication.interceptor';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 const routerOptions: ExtraOptions = {
     scrollPositionRestoration: 'enabled',
@@ -171,7 +172,9 @@ const routes: Routes = [
             registrationStrategy: 'registerWhenStable:30000'
         }),
         ReactiveFormsModule,
-        RouterModule.forRoot(routes, routerOptions)
+        RouterModule.forRoot(routes, routerOptions),
+        HttpClientModule,
+        BrowserAnimationsModule
     ],
     providers: [
         AuthenticatedGuard, IsdoctorGuard, IsadminGuard,
