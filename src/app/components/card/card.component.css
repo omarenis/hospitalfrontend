@@ -1,0 +1,21 @@
+.card-body{
+    padding: 1em;
+}
+.card-img{
+    object-fit: cover;
+    height: 13rem;
+}
+.card-body {
+    background-color: #044f68;
+}
+span{
+    transition: all 1.5s;
+}
+
+button{
+    z-index: 1;
+    cursor: pointer;
+}
+.h-0{
+    height: 0;
+}

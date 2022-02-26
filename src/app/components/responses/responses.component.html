@@ -1,0 +1,34 @@
+<table aria-describedby="responses" class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">قليلا جدا</th>
+        <th scope="col">قليلا</th>
+        <th scope="col">كثيرا</th>
+        <th scope="col">كثيرا جدا</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let response of responses">
+        <td>{{response.label}}</td>
+        <td><input (change)="changeValue($event, 'never')" [checked]="response.value === 'never'" [name]="response.questionFormControlName"
+                   [readOnly]="!canUpdate" type="radio"
+                   value="never"></td>
+        <td><input (change)="changeValue($event, 'sometimes')" [checked]="response.value === 'sometimes'" [name]="response.questionFormControlName"
+                   [readOnly]="!canUpdate" type="radio"
+                   value="sometimes"></td>
+        <td><input (change)="changeValue($event, 'usual')" [checked]="response.value === 'usual'" [name]="response.questionFormControlName"
+                   [readOnly]="!canUpdate" type="radio"
+                   value="usual"></td>
+        <td><input (change)="changeValue($event, 'always')" [checked]="response.value === 'always'" [name]="response.questionFormControlName"
+                   [readOnly]="!canUpdate" type="radio"
+                   value="always"></td>
+        <td>
+            <button (click)="sendEvent(response.id)" *ngIf="canUpdate" class="btn btn-sm btn-success" type="button">
+                تغيير الإجابة
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>

@@ -1,0 +1,22 @@
+@media (min-width: 576px) {
+    img{
+        height: 40vh;
+    }
+}
+
+@media (min-width: 768px){
+    img{
+        height: 30vh;
+    }
+}
+
+@media (min-width: 992px) {
+    img{
+        height: 25vh;
+    }
+}
+@media (min-width: 1200px) {
+    img{
+        height: 25vh;
+    }
+}

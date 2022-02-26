@@ -1,0 +1,10 @@
+<div class="card rounded-left shadow mb-2 m-auto" (click)="showOrHide()">
+    <img src="{{image}}" alt="" class="card-img-top">
+    <div class="card-body">
+        <h5 class="card-title text-white">{{title}}</h5>
+        <p  class="card-text text-white" [@readMore]="state">
+            {{description}}
+        </p>
+        <span class="btn btn-success d-inline-block position-relative"></span>
+    </div>
+</div>
