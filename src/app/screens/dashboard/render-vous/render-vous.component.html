@@ -1,0 +1,99 @@
+<h1 class="card-header text-center text-white h-25 border-0 h1" style="background-color: #6c757d">
+    المواعيد
+</h1>
+<form class="card" [formGroup]="formGroup" (ngSubmit)="submit($event)" *ngIf="typeUser === 'doctor'">
+    <div class="card-header bg-transparent">
+        <h1 class="text-center text-danger">اضافة طلب موعد</h1>
+    </div>
+    <div class="card-body align-items-center">
+        <div class="row g-2">
+            <div class="col-md-4">
+                <div class="form-floating">
+                    <select aria-label="Floating label select example" class="form-select" id="floatingSelectGrid" formControlName="parent_id">
+                        <option selected></option>
+                        <option *ngFor="let parent of parents;" [value]="parent.id">{{parent.name + '\t' + parent.familyName}}</option>
+                    </select>
+                    <label for="floatingSelectGrid">الولي</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-floating">
+                    <input class="form-control" id="floatingInputGrid" type="datetime-local" formControlName="date">
+                    <label for="floatingInputGrid">تاريخ الموعد</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-success btn-sm" style="font-size: 18px">طلب الموعد</button>
+            </div>
+        </div>
+    </div>
+</form>
+<section class="container-fluid">
+    <div class="card">
+        <div class="card-body table-responsive">
+            <table aria-describedby="patients" class="table">
+                <thead>
+                <tr>
+                    <th *ngFor="let header of headers" class="text-center" scope="col">{{header}}</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let consultation of data; let i = index">
+                    <td class="text-center">
+                        {{consultation.id}}
+                    </td>
+                    <td class="text-center">
+                        {{consultation.date | date}}
+                    </td>
+                    <td class="text-center">
+                        {{typeUser === 'doctor'  ? consultation?.parent?.name : consultation?.doctor?.name}}
+                    </td>
+                    <td class="text-center">
+                        {{typeUser === 'doctor'  ? consultation?.parent?.familyName : consultation?.doctor?.familyName}}
+                    </td>
+                    <td class="text-center" style="direction: ltr">
+                        {{typeUser === 'doctor'  ? consultation?.parent?.telephone : consultation?.doctor?.telephone}}
+                    </td>
+                    <td class="text-center">
+                        {{consultation.accepted === true ? 'مقبول' : 'في انتظار القبول او الرفض'}}
+                    </td>
+                    <td *ngIf="typeUser === 'parent' && consultation.accepted !== true"
+                        class="buttons d-flex justify-content-end align-items-center">
+                        <button (click)="acceptConsultation(consultation.id, i)"
+                            class="btn btn-sm btn-outline-success align-self-center justify-content-center">
+                            القبول
+                        </button>
+                        <button (click)="delete(consultation.id, i)"
+                                class="btn btn-sm btn-outline-danger align-self-center justify-content-center">
+                            الرفض
+                        </button>
+                    </td>
+                    <td *ngIf="typeUser === 'doctor' && consultation.accepted === false"
+                        class="buttons d-flex justify-content-end align-items-center">
+                        <button
+                            class="btn btn-sm btn-outline-success align-self-center justify-content-center"
+                            (click)="getConsultationById(consultation.id, i)"
+                        >
+                            <em class="material-icons">mode_edit</em>
+                        </button>
+                        <button (click)="delete(consultation.id, i)"
+                                class="btn btn-sm btn-outline-danger align-self-center justify-content-center">
+                            <em class="material-icons">delete</em>
+                        </button>
+                    </td>
+                    <td *ngIf="typeUser === 'doctor' && consultation.accepted === true"
+                        class="buttons d-flex justify-content-end align-items-center">
+                        <a
+                            class="btn btn-sm btn-outline-success align-self-center justify-content-center"
+                            routerLink="/dashboard/rendez-vous/{{consultation.id}}/create"
+                        >
+                            اضافة تشخيص
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

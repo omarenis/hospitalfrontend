@@ -1,0 +1,10 @@
+<div class="container-fluid d-flex flex-wrap">
+    <div class="card" style="width: 18rem;" *ngFor="let doctor of doctors">
+        <img alt="..." class="card-img-top img-thumbnail m-auto" src="/assets/kisspng-doctor-of-medicine-physician-hospital-specialty-male-doctor-5b0d653baeadd7.9674088115276045397155.png">
+        <div class="card-body">
+            <h5 class="card-title text-center">{{doctor.name + ' '+doctor.familyName}}</h5>
+            <p class="card-text text-center">اﻹختصاص {{doctor.speciality}}</p>
+            <button class="btn btn-primary text-center text-sm w-100" (click)="selectSupervisor(doctor.id)">جعله طبيب مشرف</button>
+        </div>
+    </div>
+</div>

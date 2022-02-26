@@ -1,0 +1,6 @@
+router-outlet{ display: none; }
+.router-container{ position: fixed; }
+.router-container > * { display: inline; }
+.dropdown-toggle::after {
+    content: none;
+}

@@ -1,0 +1,77 @@
+<h1 class="card-header text-center text-white h-25 border-0 h1" style="background-color: #6c757d">
+     {{typeUser === 'parent' ? 'قائمة الاطفال المسجلين' : 'قائمة المرضى'}}
+</h1>
+<section class="container">
+    <div class="d-flex mt-1 justify-content-start">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="stats-icon purple text-white">
+                            <span class="material-icons">person</span>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <h6 class="text-muted font-semibold">{{typeUser === 'parent' ? 'الاطفال' : 'المرضى'}}</h6>
+                        <h6 class="font-extrabold mb-0">{{numberPatients}}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="w-100">
+                <a *ngIf="typeUser === 'parent'" class="btn-sm btn rounded-pill btn-success float-end mb-2"
+                   routerLink="/form/parent/1"
+                   type="button">{{typeUser === 'parent' ? 'اضافة طفل' : 'اضافة مريض'}}</a>
+                <a *ngIf="typeUser === 'teacher'" class="btn-sm btn rounded-pill btn-success float-end mb-2"
+                   routerLink="/form/teacher/1"
+                   type="button">{{typeUser === 'teacher' ? 'اضافة تلميذ' : 'اضافة مريض'}}</a>
+            </div>
+            <table aria-describedby="patients" class="table" id="table1">
+                <thead>
+                <tr>
+                    <th *ngFor="let header of headers" class="text-center" scope="col">{{header}}</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let patient of data; let i = index">
+                    <td class="text-center">
+                        {{patient.id}}
+                    </td>
+                    <td class="text-center">
+                        {{patient.name}}
+                    </td>
+                    <td class="text-center">
+                        {{patient.familyName}}
+                    </td>
+                    <td class="text-center">
+                        {{patient.birthdate}}
+                    </td>
+                    <td class="text-center">
+                        {{patient.school}}
+                    </td>
+                    <td class="buttons d-flex justify-content-end align-items-center">
+                        <a *ngIf="patient.id" class="btn btn-sm btn-outline-primary align-self-center"
+                           routerLink="/dashboard/patients/{{patient.id}}" style="width: 42px; height: 35px">
+                            <em class="material-icons">visibility</em>
+                        </a>
+                        <button *ngIf="typeUser === 'parent'"
+                                class="btn btn-sm btn-outline-warning align-self-center justify-content-center"
+                                style="width: 42px; height: 35px">
+                            <em class="material-icons">edit</em>
+                        </button>
+                        <button (click)="delete(patient.id, i)" *ngIf="typeUser === 'parent'"
+                                class="btn btn-sm btn-outline-danger align-self-center justify-content-center"
+                                style="width: 42px; height: 35px">
+                            <em class="material-icons">delete</em>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

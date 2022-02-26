@@ -7,11 +7,11 @@ import {CanActivate, Router} from '@angular/router';
 export class IsadminGuard implements CanActivate {
     constructor(private router: Router) {
     }
-    canActivate(): boolean {
+    async canActivate(): Promise<boolean> {
         if (localStorage.getItem('typeUser') === 'admin'){
             return true;
         }
-        this.router.navigate(['/landing/home']);
+        await this.router.navigate(['/landing/home']);
         return false;
     }
 }

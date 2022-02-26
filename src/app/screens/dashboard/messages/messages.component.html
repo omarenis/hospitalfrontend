@@ -1,0 +1,102 @@
+<div class="page-heading email-application">
+    <div class="page-title row text-center mb-3">
+        <h3>الرسائل</h3>
+    </div>
+    <div class="container bootdey">
+        <div class="email-app mb-4">
+            <nav>
+                <button class="btn btn-danger btn-block" data-bs-target="#exampleModal" data-bs-toggle="modal">رسالة
+                    جديدة
+                </button>
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/dashboard/messages">
+                            <span class="align-self-md-center"> كل الرسائل </span>
+                            <em
+                                class="badge badge-danger">
+                                {{numberItems}}
+                            </em>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><em class="fa fa-rocket"></em> المرسلة سابقا</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><em class="fa fa-inbox"></em> المستقبلة <span
+                            class="badge badge-danger">4</span></a>
+                    </li>
+                </ul>
+            </nav>
+            <main class="inbox">
+                <ul class="messages">
+                    <li class="message" *ngFor="let message of data" [ngClass]="{'unread': message.read}">
+                        <a routerLink="/dashboard/messages/{{message.id}}">
+                            <div class="header">
+                                <span class="date">
+                        <span class="fa fa-paper-clip"></span>{{message.date | date}}</span>
+                            </div>
+                            <div class="title">
+                                {{message.subject}}
+                            </div>
+                            <div class="description">
+                                {{message.content.substr(0, 100)}}
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" tabindex="-1" #messages>
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center w-100" id="exampleModalLabel">رسالة جديدة</h5>
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body email-app">
+                <form class="container" [formGroup]="formGroup" (ngSubmit)="submit($event)">
+                    <div>
+                        <div class="row mb-3">
+                            <label class="col-2 col-sm-2 col-form-label text-center" for="sender">المرسل</label>
+                            <div class="col-10 col-sm-10">
+                                <input class="form-control" id="sender" placeholder="Type email" type="email"
+                                       formControlName="sender">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-2 col-sm-2 col-form-label text-center" for="receivers">المرسلون اليهم</label>
+                            <div class="col-6 col-sm-10">
+                                <input class="form-control" id="receivers" placeholder="Type email" type="text"
+                                       formControlName="receivers">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-4 col-sm-2 col-form-label text-center" for="subject">موضوع الرسالة</label>
+                            <div class="col-6 col-sm-10">
+                                <input class="form-control" id="subject" placeholder="Type email" type="text"
+                                       formControlName="subject">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <label class="col-2 col-sm-2 text-center col-form-label" for="content">المحتوى</label>
+                        <div class="col-10 col-sm-10">
+                                    <textarea class="form-control" id="content" name="content"
+                                              placeholder="Click here to reply" formControlName="content"
+                                              rows="12"></textarea>
+                        </div>
+                        <div class="col-sm-11 ml-auto mt-4 offset-1">
+                            <div class="d-flex justify-content-around">
+                                <button class="btn btn-success w-25" type="submit" [disabled]="formGroup.invalid">Send</button>
+                                <button class="btn btn-danger w-25" type="reset">Discard</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

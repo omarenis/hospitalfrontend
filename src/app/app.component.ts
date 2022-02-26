@@ -26,10 +26,12 @@ export class AppComponent implements OnInit{
     name !: string;
     familyName !: string;
     typeUser !: string | null;
+    isDoctor  !: boolean;
+    isAdmin !: boolean;
 
     constructor(private loginService: LoginSignupService, private router: Router, private domSanitizer: DomSanitizer,
                 private secureStorageService: SecureStorageService,
-                @Inject(PLATFORM_ID) private platformId) {
+                @Inject(PLATFORM_ID) private platformId: any) {
     }
 
     ngOnInit(): void {
@@ -46,6 +48,8 @@ export class AppComponent implements OnInit{
                 this.familyName = localStorage.getItem('familyName') || '';
             }
             this.connected = localStorage.getItem('access') !== null;
+            this.isDoctor = localStorage.getItem('typeUser') === 'dcotor';
+            this.isAdmin = localStorage.getItem('typeUser') === 'admin';
         }
     }
 

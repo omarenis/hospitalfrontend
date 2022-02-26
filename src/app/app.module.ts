@@ -1,31 +1,30 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
-import { CardComponent } from './components/card/card.component';
-import { CustomCardComponent } from './components/custom-card/custom-card.component';
-import { ResponsesComponent } from './components/responses/responses.component';
-import { ConsultationsComponent } from './screens/dashboard/consultations/consultations.component';
-import { MessagesComponent } from './screens/dashboard/messages/messages.component';
-import { PatientsComponent } from './screens/dashboard/patients/patients.component';
-import { PatientsIdComponent } from './screens/dashboard/patients-id/patients-id.component';
-import { ProfileComponent } from './screens/dashboard/profile/profile.component';
-import { RenderVousComponent } from './screens/dashboard/render-vous/render-vous.component';
-import { UsersComponent } from './screens/dashboard/users/users.component';
-import { FormIdComponent } from './screens/form/form-id/form-id.component';
-import { OrientationComponent } from './screens/form/orientation/orientation.component';
-import { PatientComponent } from './screens/form/patient/patient.component';
-import { LandingComponent } from './screens/landing/landing.component';
-import { AboutComponent } from './screens/landing/about/about.component';
-import { HomeComponent } from './screens/landing/home/home.component';
-import { HowtoComponent } from './screens/landing/howto/howto.component';
-import { JoinComponent } from './screens/landing/join/join.component';
-import { YouKnowComponent } from './screens/landing/you-know/you-know.component';
-import { NotFoundComponent } from './screens/not-found/not-found.component';
-import { ResponseTeacherComponent } from './screens/response-teacher/response-teacher.component';
-import { SignupComponent } from './screens/signup/signup.component';
+import {AppComponent} from './app.component';
+import {ServiceWorkerModule} from '@angular/service-worker';
+import {environment} from '../environments/environment';
+import {CardComponent} from './components/card/card.component';
+import {CustomCardComponent} from './components/custom-card/custom-card.component';
+import {ResponsesComponent} from './components/responses/responses.component';
+import {ConsultationsComponent} from './screens/dashboard/consultations/consultations.component';
+import {MessagesComponent} from './screens/dashboard/messages/messages.component';
+import {PatientsComponent} from './screens/dashboard/patients/patients.component';
+import {PatientsIdComponent} from './screens/dashboard/patients-id/patients-id.component';
+import {ProfileComponent} from './screens/dashboard/profile/profile.component';
+import {RenderVousComponent} from './screens/dashboard/render-vous/render-vous.component';
+import {UsersComponent} from './screens/dashboard/users/users.component';
+import {FormIdComponent} from './screens/form/form-id/form-id.component';
+import {OrientationComponent} from './screens/form/orientation/orientation.component';
+import {PatientComponent} from './screens/form/patient/patient.component';
+import {LandingComponent} from './screens/landing/landing.component';
+import {AboutComponent} from './screens/landing/about/about.component';
+import {HomeComponent} from './screens/landing/home/home.component';
+import {HowtoComponent} from './screens/landing/howto/howto.component';
+import {JoinComponent} from './screens/landing/join/join.component';
+import {YouKnowComponent} from './screens/landing/you-know/you-know.component';
+import {NotFoundComponent} from './screens/not-found/not-found.component';
+import {SignupComponent} from './screens/signup/signup.component';
 import {ExtraOptions, RouterModule, Routes} from '@angular/router';
 import {AuthenticatedGuard} from './authguard/authenticated.guard';
 import {IsadminGuard} from './authguard/is-admin.guard';
@@ -36,6 +35,7 @@ import {NotfoundComponent} from './screens/notfound/notfound.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthenticationInterceptor} from './interceptors/authentication.interceptor';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
+
 const routerOptions: ExtraOptions = {
     scrollPositionRestoration: 'enabled',
     anchorScrolling: 'enabled'
@@ -103,7 +103,7 @@ const routes: Routes = [
                 path: 'messages', canActivate: [AuthenticatedGuard],
                 children: [
                     {path: '', component: MessagesComponent},
-                    { path: ':id', component: MessageReplayComponent }
+                    {path: ':id', component: MessageReplayComponent}
                 ]
             },
             {
@@ -114,10 +114,6 @@ const routes: Routes = [
                     },
                     {
                         path: ':id', component: PatientsIdComponent
-                    },
-                    {
-                        path: ':patientId/:teacherId',
-                        component: ResponseTeacherComponent
                     }
                 ]
             },
@@ -138,32 +134,34 @@ const routes: Routes = [
         path: '**', component: NotfoundComponent
     }
 ];
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    CardComponent,
-    CustomCardComponent,
-    ResponsesComponent,
-    ConsultationsComponent,
-    MessagesComponent,
-    PatientsComponent,
-    PatientsIdComponent,
-    ProfileComponent,
-    RenderVousComponent,
-    UsersComponent,
-    FormIdComponent,
-    OrientationComponent,
-    PatientComponent,
-    LandingComponent,
-    AboutComponent,
-    HomeComponent,
-    HowtoComponent,
-    JoinComponent,
-    YouKnowComponent,
-    NotFoundComponent,
-    ResponseTeacherComponent,
-    SignupComponent
-  ],
+    declarations: [
+        AppComponent,
+        MessageReplayComponent,
+        CardComponent,
+        CustomCardComponent,
+        ResponsesComponent,
+        ConsultationsComponent,
+        MessagesComponent,
+        PatientsComponent,
+        PatientsIdComponent,
+        ProfileComponent,
+        RenderVousComponent,
+        UsersComponent,
+        FormIdComponent,
+        OrientationComponent,
+        PatientComponent,
+        LandingComponent,
+        AboutComponent,
+        HomeComponent,
+        HowtoComponent,
+        JoinComponent,
+        YouKnowComponent,
+        NotFoundComponent,
+        SignupComponent,
+        DiagnosticComponent
+    ],
     imports: [
         BrowserModule.withServerTransition({appId: 'serverApp'}),
         ServiceWorkerModule.register('ngsw-worker.js', {
@@ -175,15 +173,16 @@ const routes: Routes = [
         ReactiveFormsModule,
         RouterModule.forRoot(routes, routerOptions)
     ],
-  providers: [
-      AuthenticatedGuard, IsdoctorGuard, IsadminGuard,
+    providers: [
+        AuthenticatedGuard, IsdoctorGuard, IsadminGuard,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthenticationInterceptor,
             multi: true
         },
         FormsModule
-  ],
-  bootstrap: [AppComponent]
+    ],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

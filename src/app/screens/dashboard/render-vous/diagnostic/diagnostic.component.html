@@ -1,0 +1,19 @@
+<h1 class="card-header text-center text-white h-25 border-0 h1" style="background-color: #6c757d">
+    {{action === 'create' ? 'اضافة' : 'تغيير'}} تشخيص
+</h1>
+<form class="container-fluid mt-5" [formGroup]="formGroup" (ngSubmit)="submit($event)">
+    <div class="mb-3 form-floating">
+        <select aria-label="Floating label select example" class="form-select" id="floatingSelect" formControlName="patient_id">
+            <option selected>اختر المريض</option>
+            <option *ngFor="let patient of patients" [value]="patient.id">{{patient.name + ' '+patient.familyName}}</option>
+        </select>
+        <label for="floatingSelect">المريض</label>
+    </div>
+    <div class="mb-3">
+        <label class="form-label text-center w-100" for="diagnostic">التشخيص</label>
+        <textarea class="form-control" id="diagnostic" rows="10" formControlName="diagnostic"></textarea>
+    </div>
+    <button type="submit" class="btn btn-success w-100" [disabled]="formGroup.invalid">
+        {{action === 'create' ? 'اضافة' : 'تغيير'}} تشخيص
+    </button>
+</form>

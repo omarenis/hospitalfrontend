@@ -1,0 +1,39 @@
+<div class="container-fluid d-flex p-0 align-items-stretch justify-content-between">
+    <div [@routerAnimation]="getDepth(myOutlet)" class="container-fluid bd-highlight p-2 flex-fill flex-grow-2 d-block">
+        <router-outlet #myOutlet="outlet"></router-outlet>
+    </div>
+</div>
+<div class="fixed-bottom mb-4" style="margin-right: 3%">
+    <div class="btn-group dropup">
+        <button aria-expanded="false" class="btn btn-secondary text-center dropdown-toggle m-2 rounded-circle"
+                data-bs-toggle="dropdown"
+                style="width: 15%; background-color: #044f68;" type="button">
+            <span class="material-icons">mail</span>
+        </button>
+        <form [formGroup]="messageForm" class="dropdown-menu" style="width: 500px">
+            <div class="mb-3 container">
+                <label class="form-label" for="sender">المرسل</label>
+                <input class="form-control" formControlName="sender" id="sender" placeholder=" بريد المرسل"
+                       type="email">
+            </div>
+            <div class="mb-3 container">
+                <label class="form-label" for="receiver">كلمة السر </label>
+                <input class="form-control" formControlName="password" id="receiver" placeholder="" type="password">
+            </div>
+            <div class="mb-3 container">
+                <label class="form-label" for="subject">عنوان الرسالة</label>
+                <input class="form-control" formControlName="object" id="subject" placeholder="" type="text">
+            </div>
+            <div class="mb-3 container">
+                <label class="form-label" for="content">محتوى الرسالة</label>
+                <textarea class="form-control" formControlName="content" id="content" rows="3"></textarea>
+            </div>
+            <div class="mb-3 d-flex justify-content-around container">
+                <label class="form-label" for="content">ارسال</label>
+                <button class="btn btn-success text-center" id="submit" type="submit" style="transform: rotate(180deg);">
+                    <em class="material-icons">send</em>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,193 @@
+<div class="d-flex mt-1 justify-content-around">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="stats-icon purple text-white">
+                        <span class="material-icons">person</span>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <h6 class="text-muted font-semibold">عدد مستعملي المنصّة</h6>
+                    <h6 class="font-extrabold mb-0">{{numberItems}}</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="stats-icon blue text-white">
+                        <span class="material-icons">email</span>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <h6 class="text-muted font-semibold">الرسائل</h6>
+                    <h6 class="font-extrabold mb-0"></h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="d-flex justify-content-between">
+
+    <div class="form-floating w-25" *ngIf="typeUser === 'admin'">
+        <select (change)="change_data($event)" aria-label="Floating label select example"
+                class="form-select"
+                id="floatingSelect" name="typeUser">
+            <option selected value=""></option>
+            <option value="parent">ولي</option>
+            <option value="doctor">طبيب</option>
+            <option value="teacher">مربي</option>
+            <option value="school">مدرسة</option>
+        </select>
+        <label for="floatingSelect">بحث بإستعمال نوع المستعمل</label>
+    </div>
+    <button class="btn btn-success" data-bs-target="#formAddUser" data-bs-toggle="modal">
+       إضافة {{typeUser === 'admin' ? ' مدرسة أو طبيب أول' : (typeUser === 'superdoctor' ? 'طبيب' : 'مربي')}}
+    </button>
+</div>
+<table aria-describedby="users" class="table mt-5">
+    <thead>
+    <tr>
+        <th class="text-center" scope="col">رقم بطاقة التعريف أو رمز الدخول</th>
+        <th class="text-center" scope="col">اﻹسم</th>
+        <th class="text-center" scope="col" *ngIf="typeUser !== 'admin'">اللقب</th>
+        <th class="text-center" scope="col" *ngIf="typeUser === 'superdoctor'">اﻹختصاص</th>
+        <th class="text-center" scope="col">رقم الهاتف</th>
+        <th class="text-center" scope="col">البريد اﻹلكتروني</th>
+        <th class="text-center" scope="col" *ngIf="typeUser === 'admin'">نوع المستعمل</th>
+        <th class="text-right" scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let person of data; let i = index">
+        <td class="text-center">{{person.loginNumber}}</td>
+        <td class="text-center">{{person.name}}</td>
+        <td class="text-center" *ngIf="typeUser !== 'admin'">{{person.familyName}}</td>
+        <td class="ltr-text text-center">{{person.telephone}}</td>
+        <td class="text-center">{{person.email}}</td>
+        <td class="text-center" *ngIf="typeUser === 'admin'">{{person.typeUser}}</td>
+        <td class="text-center">
+            <button *ngIf="person.typeUser !== 'admin'" class="btn btn-danger" style="width: 40px; height: 40px;"
+                    type="button" (click)="delete(person.id, i)">
+                <em  class="material-icons" style="width: 20px; height: 30px">
+                    person_remove_alt_1
+                </em>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<form #addUserForm (submit)="addUser($event)" [formGroup]="formGroup" aria-hidden="true" aria-labelledby="exampleModalLabel"
+      class="modal fade"
+      id="formAddUser" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header w-100">
+                <h5 class="modal-title text-center text-danger" id="exampleModalLabel">{{typeUser === 'admin' ? 'إضافة مدرسة أو طبيب أول': (typeUser === 'superdoctor'? 'إضافة طبيب' : 'إضافة مربي')}}</h5>
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-check form-check-inline ml-5" *ngIf="typeUser === 'admin'">
+                    <label class="form-check-label text-center" for="inlineRadio1">نوع المستعمل</label>
+                </div>
+                <div class="form-check form-check-inline" *ngIf="typeUser === 'admin'">
+                    <input (change)="changeTypeUserToAdd($event)" class="form-check-input" formControlName="typeUser"
+                           id="inlineRadio1" name="typeUser" type="radio" value="school">
+                    <label class="form-check-label" for="inlineRadio1">مدرسة</label>
+                </div>
+                <div class="form-check form-check-inline mb-3"  *ngIf="typeUser === 'admin'">
+                    <input (change)="changeTypeUserToAdd($event)" class="form-check-input"
+                           formControlName="typeUser" id="inlineRadio2" name="typeUser" type="radio"
+                           value="superdoctor">
+                    <label class="form-check-label" for="inlineRadio2">طبيب أول</label>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-4 col-lg-2 col-form-label text-center"
+                           for="name">إسم {{typeUser === 'admin' ? (isSuperDoctor ? 'و لقب الطبيب الأول' : ' المدرسة') : (typeUser === 'superdoctor' ? 'الطبيب' : 'المربي')}}</label>
+                    <div class="col-sm-8 col-lg-10">
+                        <input class="form-control" formControlName="name" id="name" name="name" type="text">
+                    </div>
+                </div>
+                <div class="mb-3 row" *ngIf="typeUser !== 'admin'">
+                    <label class="col-sm-4 col-lg-2 col-form-label text-center"
+                           for="name">لقب {{typeUser === 'school' ? 'المربي' : 'الطبيب'}}</label>
+                    <div class="col-sm-8 col-lg-10">
+                        <input class="form-control" formControlName="familyName" id="familyName" name="familyName" type="text">
+                    </div>
+                </div>
+                <div class="mb-3 row" *ngIf="typeUser === 'superdoctor'">
+                    <label class="col-sm-4 col-lg-2 col-form-label text-center" for="speciality">اﻹختصاص</label>
+                    <div class="col-sm-8 col-lg-10">
+                        <input class="form-control" formControlName="speciality" id="speciality" name="speciality"
+                               type="text">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-4 col-lg-2 col-form-label text-center"
+                           for="loginNumber">{{typeUser !== 'admin' && !isSuperDoctor ? 'رقم بطاقة التعريف' : 'رقم الدخول'}}</label>
+                    <div class="col-sm-8 col-lg-10">
+                        <input class="form-control" formControlName="loginNumber" id="loginNumber" name="loginNumber"
+                               type="text">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-4 col-lg-2 col-form-label text-center" for="telephone">رقم الهاتف</label>
+                    <div class="col-sm-8 col-lg-10">
+                        <input class="form-control" formControlName="telephone" id="telephone" name="telephone"
+                               type="text">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-4 col-lg-2 col-form-label text-center" for="email">البريد اﻹلكتروني</label>
+                    <div class="col-sm-8 col-lg-10">
+                        <input class="form-control" formControlName="email" id="email" type="text" name="email">
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <label class="col-sm-4 col-lg-2 col-form-label text-center" for="password">كلمة السر</label>
+                    <div class="col-sm-8 col-lg-10">
+                        <input class="form-control" formControlName="password" id="password" name="password"
+                               type="password">
+                    </div>
+                </div>
+                <div *ngIf="!isSuperDoctor || isSuperDoctor === null ||isSuperDoctor === undefined || typeUser !== 'admin'" class="row">
+                    <label class="col-sm-4 col-lg-2 col-form-label text-center">الموقع</label>
+                    <div
+                         class="col-sm-8 col-lg-10 row">
+                        <div class="mb-sm-2 align-self-center form-group col-lg-4 col-md-6 colk-sm-12 row">
+                            <label class="col-4 col-form-label" for="governorate">الولاية</label>
+                            <div class="col-8">
+                                <input class="form-control-sm form-control" formControlName="governorate"
+                                       id="governorate"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="mb-sm-2 form-group align-self-center col-lg-4 col-md-6 colk-sm-12 row">
+                            <label class="col-4 col-form-label" for="delegation">المعتمدية</label>
+                            <div class="col-8">
+                                <input class="form-control-sm form-control" formControlName="delegation" id="delegation"
+                                       name="delegation" type="text">
+                            </div>
+                        </div>
+                        <div
+                             class="mb-sm-2 form-group align-self-center col-lg-4 col-md-6 colk-sm-12 row">
+                            <label class="col-7 col-form-label" for="zipCode">الترقيم البريدي</label>
+                            <div class="col-5">
+                                <input class="form-control-sm  form-control" formControlName="zipCode" id="zipCode"
+                                       name="zipCode" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">إغلاق</button>
+                <button class="btn btn-primary" type="submit" [disabled]="formGroup.invalid">إضافة مستعمل</button>
+            </div>
+        </div>
+    </div>
+</form>

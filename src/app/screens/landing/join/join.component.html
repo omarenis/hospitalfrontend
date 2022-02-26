@@ -1,0 +1,64 @@
+<div class="card w-100 h-100 border-0 w-100 h-80">
+    <div class="card-header bg-secondary border-0 w-100">
+        <h1 class="h1 text-center text-danger text-white m-auto">للمشاركة</h1>
+    </div>
+    <div class="card-body container p-2 ">
+        <ol class="m-2 d-flex flex-column">
+            <li class="h2 flex-fill card shadow mt-1">
+                <div class="card-body">
+                    <ul class="list-unstyled p-0 m-2">
+                        <li class="style m-1 mb-3">
+                            <span class="text-danger"></span>المطلوب في مرحلة اولى تعمير الاختبار المخصص لذلك.<br>يجب تعمير الإستبيان من قبل الولي و المربي.<br>
+                            كل المعطيات المدلاة تخضع للحماية فلا يمكن التعرف عليها الا
+                            من طرف الفريق الطبي.
+                        </li>
+                        <li class="style m-1  mb-3">
+                            <span class="text-danger">*</span> اذا كنت ترغب في المشاركة في التقصي الرجاء
+                            الادلاء بموافقتك:
+                        </li>
+                        <li>
+                            <div class="d-inline">
+                                <div class="mb-3 row pe-auto">
+                                    <label class="col-sm-3 col-form-label h5">
+                                        اوافق على المشاركة
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <button type="button" class="btn btn-success h-25" style="margin-top: 12px"
+                                                data-bs-toggle="modal" data-bs-target="#form"></button>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label class="col-sm-3 col-form-label h5">
+                                        لا اوافق على المشاركة
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <button type="button" class="btn btn-info h-25" style="margin-top: 12px"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ol>
+    </div>
+</div>
+<div  #form aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="form" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">
+                    من أنت ؟
+                </h5>
+            </div>
+            <div class="d-flex container" style="margin: 2px">
+                <a  class="btn btn-primary w-25" data-bs-dismiss="modal" type="button" (click)="goToForm($event, 'parent')">
+                    ولي
+                </a>
+                <a  class="btn btn-primary w-25" style="margin-right: 50%" data-bs-dismiss="modal" type="button" (click)="goToForm($event, 'teacher')">
+                    مربي
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

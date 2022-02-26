@@ -1,0 +1,139 @@
+<div class="carousel slide" data-bs-ride="carousel" id="carouselExampleControls">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img alt="" class="d-block w-100" src="/assets/image4.jpg">
+        </div>
+        <div class="carousel-item">
+            <img alt="" class="d-block w-100" src="/assets/image1.jpg">
+        </div>
+        <div class="carousel-item">
+            <img alt="" class="d-block w-100" src="/assets/image3.jpg">
+        </div>
+        <button class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#carouselExampleControls"
+                type="button">
+            <span aria-hidden="true" class="carousel-control-prev-icon"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" data-bs-slide="next" data-bs-target="#carouselExampleControls"
+                type="button">
+            <span aria-hidden="true" class="carousel-control-next-icon"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <div>
+        <h3 class="text-center mt-3">
+            الاختصاصات
+        </h3>
+    </div>
+    <div
+        class="container-fluid p-auto row align-items-stretch justify-content-md-around justify-content-lg-center m-auto gap-1">
+        <app-card [description]="specialities[0].description" [image]="specialities[0].image"
+                  [title]="specialities[0].title" class="col-lg-3 col-md-3 col-sm-12"></app-card>
+        <app-card [description]="specialities[1].description" [image]="specialities[1].image"
+                  [title]="specialities[1].title" class="col-lg-3 col-md-3 col-sm-12"></app-card>
+        <app-card [description]="specialities[2].description" [image]="specialities[2].image"
+                  [title]="specialities[2].title" class="col-lg-3 col-md-3 col-sm-12"></app-card>
+    </div>
+    <div class="d-flex justify-content-center w-auto">
+        <a class="btn btn-primary" routerLink="/landing/specialities" type="button">أظهر المزيد</a>
+    </div>
+    <div class="card w-auto">
+        <div class="container card-body mt-5 w-auto border-5 shadow">
+            <h1 class="h3 text-center text-blue">ما هو إضطراب النقص في التركيز و فرط الحركة أي الTDAH ؟</h1>
+            <p class="card-text">
+                إن ال من أكثر الإضطربات السلوكية إنتشارا بين الأطفال و المراهقين, يتّصف باﻷعراض الرّئيسيّة التالية:كثرة
+                الحركة,اﻹندفاع و النقص في التركيز.
+            </p>
+            <ul>
+                <li class="mt-1">
+                    <p class="card-text">
+                        <span class="h5 text-blue">كثرة الحركة</span> :يجد صعوبة في الّعب بهدوء. يجد صعوبة في ملازمة
+                        مكانه. دائم الحركة. يندفع كما لو أنّه مزوّد بمحرّك. يتكلّم بشكل مفرط. يركض مهتاجا و في أوقات غير
+                        مناسبة
+                    </p>
+                </li>
+
+                <li class="mt-1">
+                    <p class="card-text">
+                        <span class="h5 text-blue">اﻹندفاع</span>:يواجه صعوبة في انتظار دوره. غالبا ما يقاطع اﻵخرين.
+                        يتسرّع باﻹجابات قبل اكتمال اﻷسئلة. يتدخّل في عمل اﻵخرين. يخالف التعليمات.
+                    </p>
+                </li>
+                <li class="mt-1">
+                    <p class="card-text">
+                        <span class="h5 text-blue">النقص في التركيز:</span>يجد صعوبة في مواصلة اﻹنتباه و التركيز. يبدو
+                        أنّه غير منصت. يمكن تشتيت انتباهه بسهولة. يرتكب هفوات تنمّ عن عدم اﻹكتراث. يجد صعوبة في تنظيم
+                        المهام أو انجازها. يتجنّب النشاطات الّتي تتطلّب منه جهدا عقليا متواصلا. يفقد اﻷشياء بسهولة.
+                    </p>
+                </li>
+            </ul>
+            <p class="container m-auto">
+                بالطبع يتصرّف اﻷطفال جميعهم بهذا الشّكل من وقت الى آخر لكن هذا ﻻ يعني بالضّرورة أنّهم مصابون بال*TDAH
+                انّ اﻷطفال المصابين غالبا ما يتصرّفون على هذا النحو بشكل مستمرّ و حاد أكثر من أبناء جيلهم.
+            </p>
+        </div>
+    </div>
+    <div class="card w-auto">
+        <div class="container card-body mt-5 w-auto border-5 shadow">
+            <h3 class="h3 text-center text-blue">كيف يتم تشخيص ال*TDAH؟</h3>
+            <p class="card-text">
+                ليس هناك من طريقة ملموسة كاجراء فحص الدم من اجل تشخيص ال*TDAH , يقوم التشخيص على الإطلاع على سلوك الطفل
+                إستنادا إلى تقارير الأهل و الأساتذة و مقارنته بلائحة من الأعراض المستخدمة رسميا لتشخيص ال*TDAH .
+                تعرف لائحة المعايير هذه بمعايير التشخيص الّتي نشرتها الجمعيّة الأمريكيّة للأمراض النفسيّةDSM-IV-TR. لا
+                يستطيع أحد إجراء التشخيص سوى أخصائي في ال*TDAH على غرار طبيب نفسي للأطفال أو طبيب يتمتّع بخبرة في هذا
+                المجال.
+            </p>
+        </div>
+    </div>
+    <div class="card w-auto">
+        <div class="container card-body mt-5 border-5 shadow">
+            <h1 class="h1 text-center text-blue">ما هي خطوات تشخيص ال*TDAH ؟</h1>
+            <p class="card-text">
+                عندما يعاين الإخاصيّ المريض. سوف يقوم بثلاث خطوات رئيسيّة:
+            </p>
+            <ol>
+                <li class="mt-1 card-text">
+                    يبحث الطبيب عن المؤشّرات المهمّة
+                </li>
+                <li class="mt-1">
+                    يستبعد الحالات المشابهة لل*TDAH
+                </li>
+                <li class="mt-1">
+                    من الممكن أن يستخدم أيضا بعض المؤشٌرات لتوجيه التشخيص كأسئلة لإستبيان رأي الأهل و المعلّّمين
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="card w-auto container border-5 shadow">
+        <div class="card-body">
+            <h1 class="h1 text-center text-blue">أعراض الTDAH * كما يلي:</h1>
+            <p class="card-text">أعراض كثرة الحركة</p>
+            <ul>
+                <li>يتململ بيديه : غير مستقر في مكانه</li>
+                <li>لديه صعوبة في الجلوس في مقعده عند اللزوم</li>
+                <li>كثير الحركة بشكل مفرط عندما يتعين عليه عدم القيام بذلك</li>
+                <li>يعاني من صعوبة في اللعب أو القيام بنشاطات ترفهيّة بهدوء</li>
+                <li>دائما جاهز للحركة أو كثير الإندفاع</li>
+                <li>دائما جاهز للحركة أو كثير الإندفاع</li>
+            </ul>
+            <p class="card-text">أعراض الإندفاع</p>
+            <ul>
+                <li>يتسّرع بالإجابات قبل اكتمال الأسئلة</li>
+                <li>يتسّرع بالإجابات قبل اكتمال الأسئلة</li>
+                <li>يقاطع الآخرين أو يتدخل فيما يتكلمون </li>
+            </ul>
+            <p class="card-text">يقاطع الآخرين أو يتدخل فيما يتكلمون </p>
+            <ul>
+                <li>يتجاهل التفاصيل و يرتكب أخطاء طائشة في فروضه المدرسية أو عمله أو نشاطاته</li>
+                <li>يعاني من صعوبة في دوام الانتباه والتركيز أثناء اللعب و الدرس</li>
+                <li>يعاني من صعوبة في الإصغاء و الإستماع للآخرين عندما يخاطب بشكل مباشر</li>
+                <li>لا يتبع التعليمات أو يكمل مهامه</li>
+                <li>يعاني من صعوبة تنظيم المهام و النشاطات  (فوضويّ)</li>
+                <li>يتجنب أو يكره المهام التي تتطلّب الجهد العقلي المتواصل</li>
+                <li>غالبا ما يفقد الأشياء الضرورية لمهامه أو نشاطاته</li>
+                <li>يصاب بالتشتّت بسهولة بفعل العوامل الجانبيّة المحيطة به</li>
+                <li>يعاني من النسيان في نشاطاته اليوميّة</li>
+            </ul>
+        </div>
+    </div>
+</div>

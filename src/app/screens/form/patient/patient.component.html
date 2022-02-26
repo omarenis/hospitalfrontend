@@ -1,0 +1,118 @@
+<div class="container mt-4">
+    <h1 class="h1 text-center text-danger">المعطيات الشخصية للطفل</h1>
+    <p class="text-danger text-center">المعطيات الشخصية للطفل مشفرة و محمية لا يمكن لأحد الإطلاع عليها سوى أنت و الطبيب
+        الخاص</p>
+    <form (ngSubmit)="submit($event)" [formGroup]="formGroup" class="container">
+        <div class="input-group mb-3 row">
+            <span class="input-group-text bg-white text-dark col-2 text-center">اسم و لقب الطفل</span>
+            <input aria-label="First name" class="form-control col-4 ml-1" formControlName="name"
+                   placeholder="الطفل اسم"
+                   type="text">
+            <input aria-label="Last name" class="form-control col-4 ml-1" formControlName="familyName"
+                   placeholder="الطفل لقب"
+                   type="text">
+        </div>
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label text-center" for="school">المدرسة </label>
+            <div class="col-sm-4">
+                <input aria-describedby="date" class="form-control" formControlName="school" id="school"
+                       type="text">
+            </div>
+            <label class="col-sm-2 col-form-label text-center" for="birthdate">تاريخ الولادة</label>
+            <div class="col-sm-2">
+                <input aria-describedby="date" class="form-control" formControlName="birthdate" id="birthdate"
+                       type="date">
+            </div>
+        </div>
+        <div class="mb-3 input-group row">
+            <span class="input-group-text bg-white text-dark col-2 text-center">اسم و لقب الولي</span>
+            <input aria-label="First name" class="form-control col-4" formControlName="parentName" id="parentName"
+                   placeholder="الولي اسم" type="text">
+            <input aria-label="Last name" class="form-control col-4" formControlName="parentFamilyName"
+                   placeholder="الولي لقب"
+                   type="text">
+        </div>
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label text-center" for="email">البريد الإلكتروني للولي</label>
+            <div class="col-10">
+                <input class="form-control" formControlName="parentEmail" id="email" type="email">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label text-center" for="parentPhone">رقم هاتف الولي</label>
+            <div class="col-sm-10">
+                <input class="form-control" formControlName="parentPhone" id="parentPhone" type="text">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label text-center" for="parentCin">رقم بطاقة التعريف الوطنية </label>
+            <div class="col-sm-10">
+                <input class="form-control" formControlName="parentCin" id="parentCin" type="text" name="parentCin">
+            </div>
+        </div>
+        <!-- form teacher  -->
+        <div *ngIf="typeUser === 'teacher'" class="mb-3 input-group row">
+            <span class="input-group-text bg-white text-dark col-2 text-center">اسم و لقب المعلم</span>
+            <input aria-label="First name" class="form-control col-4" formControlName="teacherName" id="teacherName"
+                   placeholder="اسم المعلم" type="text">
+            <input aria-label="Last name" class="form-control col-4" formControlName="teacherFamilyName"
+                   placeholder=" لقب المعلم"
+                   type="text">
+        </div>
+        <div *ngIf="typeUser === 'teacher'" class="mb-3 row">
+            <label class="col-sm-2 col-form-label text-center" for="teacherTelephone">رقم هاتف المعلم</label>
+            <div class="col-sm-10">
+                <input class="form-control" formControlName="teacherTelephone" id="teacherTelephone" type="text">
+            </div>
+        </div>
+        <div *ngIf="typeUser === 'teacher'" class="mb-3 row">
+            <label class="col-sm-2 col-form-label text-center" for="teacherCin">رقم بطاقة تعريف المعلم</label>
+            <div class="col-sm-10">
+                <input class="form-control" formControlName="teacherCin" id="teacherCin" type="text">
+            </div>
+        </div>
+        <!---------- form teacher ------>
+        <div [ngClass]="{'me-1 mb-1 d-inline-block': true, 'modal-success': validated, 'modal-danger': !validated}"
+             class="modal-success">
+            <button [disabled]="formGroup.invalid" class="btn btn-success" type="submit">
+                إضافة الطفل
+            </button>
+            <div #notify [id]=" validated ? 'success' : 'danger' " aria-hidden="true" aria-labelledby="myModalLabel110"
+                 class="modal fade text-left" role="dialog"
+                 tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+                     role="document">
+                    <div class="modal-content">
+                        <div [ngClass]="{'bg-success': validated, 'bg-danger': !validated}" class="modal-header">
+                            <h5 class="modal-title white" id="myModalLabel110">
+
+                            </h5>
+                            <button aria-label="Close" class="close"
+                                    data-bs-dismiss="modal" type="button">
+                                <em data-feather="x"></em>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p *ngIf="validated">تمت إضافة الطفل بنجاح</p>
+                            <p *ngIf="!validated">هناك خطأ في إضافة الطفل</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-light-secondary"
+                                    data-bs-dismiss="modal"
+                                    type="button">
+                                <em class="bx bx-x d-block d-sm-none"></em>
+                                <span class="d-none d-sm-block">Close</span>
+                            </button>
+                            <button [ngClass]="{'btn ml-1': true, 'btn-success': validated, 'btn-danger': !validated}"
+                                    data-bs-dismiss="modal"
+                                    type="button">
+                                <em class="bx bx-check d-block d-sm-none"></em>
+                                <span class="d-none d-sm-block">Accept</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

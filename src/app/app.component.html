@@ -30,17 +30,6 @@
                         </a>
                     </li>
                     <li class="nav-item pe-auto">
-                        <a class="nav-link text-white align-effect mt-1" routerLink="/">الرئيسية</a>
-                    </li>
-                    <li class="nav-item pe-auto">
-                        <a class="nav-link text-white align-effect mt-1" routerLink="landing/about">من نحن ؟</a>
-                    </li>
-                    <li class="nav-item pe-auto">
-                        <a class="nav-link text-white align-effect mt-1" routerLink="landing/howto">كيف يتم تقصي
-                        <a class="nav-link text-white customHover m-0" data-bs-target="#age"
-                           data-bs-toggle="modal" style="border-left: 1px solid white;" type="button">logo</a>
-                    </li>
-                    <li class="nav-item pe-auto">
                         <a class="nav-link text-white align-effect" routerLink="/">الرئيسية</a>
                     </li>
                     <li class="nav-item pe-auto">
@@ -73,7 +62,6 @@
                        data-bs-toggle="dropdown" type="button">
                         <em class="material-icons">person</em>
                         {{name + ' ' + familyName}}
-                        {{user}}
                     </a>
                     <div aria-labelledby="dropdownMenuButton" class="dropdown-menu">
                         <a class="dropdown-item" routerLink="profile">الملف الشخصي</a>
@@ -95,7 +83,6 @@
             </div>
         </div>
     </nav>
-    <ul *ngIf="connected && (typeUser === 'parent' || typeUser === 'teacher') || !connected"
     <ul *ngIf="!isDoctor && !isAdmin"
         class="nav flex-row justify-content-lg-center mt-1 justify-content-md-around p-0 d-none d-lg-flex">
         <li class="nav-item p-1">
@@ -253,9 +240,6 @@
             </div>
         </div>
     </form>
-    <div *ngIf="connected && typeUser !== 'parent' && typeUser !== 'teacher' && typeUser !== null"
-         [ngClass]="{'active sidebar-wrapper': show, 'd-none': !show}" id="sidebar">
-        <div *ngIf="typeUser === 'admin'" class="sidebar-header">
     <div *ngIf="connected && (isDoctor || isAdmin)" [ngClass]="{'active sidebar-wrapper': show, 'd-none': !show}"
          id="sidebar">
         <div *ngIf="isAdmin" class="sidebar-header">
@@ -322,38 +306,10 @@
                         </a>
                     </li>
                 </ng-container>
-                <li *ngIf="isDoctor" class="sidebar-item">
-                    <a class='sidebar-link' routerLink="dashboard/patients">
-                        <em class="bi bi-grid-fill"></em>
-                        <span>قائمة المرضى</span>
-                    </a>
-                </li>
-                <li *ngIf="isDoctor" class="sidebar-item">
-                    <a class='sidebar-link' routerLink="/dashboard/rendez-vous">
-                        <em class="bi bi-file-earmark-medical-fill"></em>
-                        <span>قائمة المواعيد</span>
-                    </a>
-                </li>
-                <li *ngIf="isAdmin" class="sidebar-item">
-                    <a class='sidebar-link' routerLink="/dashboard/users">
-                        <em class="bi bi-grid-1x2-fill"></em>
-                        <span>قائمة مستعملي المنصة</span>
-                    </a>
-                </li>
-                <li *ngIf="connected" class="sidebar-item">
-                    <a class='sidebar-link' routerLink="/dashboard/messages">
-                        <em class="bi bi-envelope-fill"></em>
-                        <span>الرسائل</span>
-                    </a>
-                </li>
             </ul>
         </div>
         <button class="sidebar-toggler btn x"><em data-feather="x"></em></button>
     </div>
-    <div [id]="typeUser !== 'parent' && typeUser !== 'teacher' && typeUser !== null ? 'main': ''"
-         class="p-0 layout-navbar">
-        <header *ngIf="typeUser !== 'parent' && typeUser !== 'teacher' && typeUser !== null" class='mb-3'>
-
     <div [id]="isDoctor || isAdmin ? 'main': ''" class="p-0 layout-navbar">
         <header *ngIf="isDoctor || isAdmin" class='mb-3'>
             <nav aria-describedby="navbar" aria-label="navbar for sidebar" class="navbar navbar-expand navbar-light ">

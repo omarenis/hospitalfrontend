@@ -1,0 +1,77 @@
+<h1 class="h1 text-center mt-3">انشاء حساب</h1>
+<form (ngSubmit)="submit($event)" [formGroup]="signupFormControl"
+      class="container-lg container-fluid m-lg-auto row mt-4 p-sm-0">
+    <div class="col-sm-12 col-md-10 col-lg-6 row form-group mt-4">
+        <label class="col-lg-4 col-md-3 col-sm-6 col-form-label-sm text-center" for="name">اﻹسم الأول</label>
+        <div class="col-lg-8 col-md-9 col-sm-6">
+            <input class="form-control-sm form-control" formControlName="name" id="name" type="text">
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-10 col-lg-6 row form-group mt-4">
+        <label class="col-lg-4 col-md-3 col-sm-6 col-form-label-sm text-center" for="familyName">اسم العائلة</label>
+        <div class="col-lg-8 col-md-9 col-sm-6">
+            <input class="form-control-sm form-control" formControlName="familyName" id="familyName" type="text">
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-10 col-lg-6 row form-group mt-4">
+        <label class="col-lg-4 col-md-3 col-sm-6 col-form-label-sm text-center" for="loginNumber">رقم بطاقة التعريف</label>
+        <div class="col-lg-8 col-md-9 col-sm-6">
+            <input class="form-control-sm form-control" formControlName="loginNumber" id="loginNumber" type="text">
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-10 col-lg-6 row form-group mt-4">
+        <label class="col-lg-4 col-md-3 col-sm-6 col-form-label-sm text-center" for="phone">رقم الهاتف</label>
+        <div class="col-lg-8 col-md-9 col-sm-6">
+            <input class="col-3 form-control-sm form-control" formControlName="telephone" id="phone" type="text">
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-10 align-items-center row mt-4">
+        <label class="col-lg-2 w-25 col-md-3 col-sm-6 col-form-label-sm text-center">الموقع</label>
+        <div class="col-lg-10 row w-75 justify-content-between">
+            <div class="mb-sm-2 align-self-center form-group col-4 row">
+                <label class="col-4 col-form-label" for="governorate">الولاية</label>
+                <div class="col-8">
+                    <input class="form-control-sm form-control" formControlName="governorate" id="governorate"
+                           type="text">
+                </div>
+            </div>
+            <div class="mb-sm-2 form-group align-self-center col-4 row">
+                <label class="col-4 col-form-label" for="delegation">المعتمدية</label>
+                <div class="col-8">
+                    <input class="form-control-sm form-control" formControlName="delegation" id="delegation"
+                           type="text">
+                </div>
+            </div>
+            <div class="mb-sm-2 form-group align-self-center col-4 row">
+                <label class="col-7 col-form-label" for="zipCode">الترقيم البريدي</label>
+                <div class="col-5">
+                    <input class="form-control-sm  form-control" formControlName="zipCode" id="zipCode" type="text">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-10 col-lg-6 row form-group mt-4">
+        <label class="col-3 col-form-label-sm text-center" for="email">البريد اﻹلكتروني</label>
+        <div class="col-8">
+            <input class="form-control-sm form-control" formControlName="email" id="email" type="text">
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-10 col-lg-6 row form-group mt-4">
+        <label class="col-form-label-sm col-3 text-center" for="password">كلمة السر</label>
+        <div class="col-9">
+            <div class="input-group mb-3">
+                <input [type]="shown === true ? 'text' : 'password'" aria-describedby="basic-addon1" aria-label=""
+                       class="form-control-sm form-control"
+                       formControlName="password" id="password" placeholder="">
+                <div class="input-group-prepend">
+                    <button (click)="showOrHidePassword()" class="btn btn-outline-secondary border-0"
+                            type="button">
+                        <em [ngClass]="{'far fa-eye-slash': !shown, 'fas fa-eye': shown}"></em>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button [disabled]="signupFormControl.invalid" class="btn btn-primary w-100 mt-3 m-auto" type="submit">انشاء حساب
+    </button>
+</form>
