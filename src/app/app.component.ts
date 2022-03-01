@@ -66,7 +66,7 @@ export class AppComponent implements OnInit{
     }
     login(event: any): void {
         event.preventDefault();
-        this.loginService.login(this.signInGroup.value.cin, this.signInGroup.value.password).then(async (response: Token) => {
+        this.loginService.login(this.signInGroup.value.loginNumber, this.signInGroup.value.password).then(async (response: Token) => {
             this.signInModal.nativeElement.click();
             response.access = this.secureStorageService.setToken(response.access);
             response.refresh = this.secureStorageService.setToken(response.refresh);
@@ -79,8 +79,10 @@ export class AppComponent implements OnInit{
             this.notify = true;
             let url: string;
             if (this.typeUser === 'doctor' || this.typeUser === 'superdoctor') {
+                this.isDoctor = true;
                 url = '/dashboard/patients';
             } else if (this.typeUser === 'admin') {
+                this.isAdmin = true;
                 url = '/dashboard/users';
             } else {
                 url = '/landing/home';
@@ -96,17 +98,19 @@ export class AppComponent implements OnInit{
             this.validated = false;
         });
     }
-    logout(): void {
+    async logout(): Promise<void> {
         let refresh = localStorage.getItem('refresh');
         let access = localStorage.getItem('access');
         if (refresh && access) {
             refresh = this.secureStorageService.getToken(refresh);
             access = this.secureStorageService.getToken(access);
-            this.loginService.logout(refresh, access).then(async () => {
+            await this.loginService.logout(refresh, access).then(() => {
                 localStorage.clear();
                 this.typeUser = null;
                 this.connected = false;
-                await this.router.navigate(['/landing/home']);
+                this.isAdmin = false;
+                this.isDoctor = false;
+                this.router.navigate(['/landing/home']);
             }).catch((error) => console.log(error));
         }
     }

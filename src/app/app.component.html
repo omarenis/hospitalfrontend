@@ -1,5 +1,5 @@
 <div id="app">
-    <nav *ngIf="!isDoctor && !isAdmin" aria-label="navbar"
+    <nav *ngIf="!isDoctor && !isAdmin " aria-label="navbar"
          class="navbar container-fluid p-0 m-0 navbar-expand-lg navbar-light">
         <div class="container-fluid m-0 p-0 border-0 mobile-version">
             <ul class="nav justify-content-between m-0 p-0 navbar-toggler w-100 border-0">
@@ -49,11 +49,6 @@
                                 data-bs-toggle="modal"
                                 style="border-right: 1px solid white;" type="button">تسجيل الدخول
                         </button>
-                    <li *ngIf="!connected" class="nav-item me-0 pe-auto">
-                        <a class="nav-link text-white customHover" data-bs-target="#signInModal"
-                           data-bs-toggle="modal"
-                           style="border-right: 1px solid white;" type="button">تسجيل الدخول</a>
-                    </li>
                 </ul>
                 <div *ngIf="connected" class="d-flex me-auto dropdown">
                     <a aria-expanded="false"
@@ -318,10 +313,10 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item dropdown me-1">
-                                <a aria-expanded="false" class="nav-link active dropdown-toggle"
+                            <li class="nav-item dropdown me-3">
+                                <a aria-expanded="false" class="nav-link active dropdown-toggle text-white mt-2"
                                    data-bs-toggle="dropdown" href="#">
-                                    <em class='bi bi-envelope bi-sub fs-4 text-gray-600'></em>
+                                    <em class="material-icons">email</em>
                                 </a>
                                 <ul aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-menu-end">
                                     <li>
