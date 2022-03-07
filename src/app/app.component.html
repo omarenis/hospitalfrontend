@@ -299,8 +299,8 @@
         </div>
         <button class="sidebar-toggler btn x"><em data-feather="x"></em></button>
     </div>
-    <div [id]="isDoctor || isAdmin ? 'main': ''" class="p-0 layout-navbar">
-        <header *ngIf="isDoctor || isAdmin" class='mb-3'>
+    <div [id]="typeUser === 'doctor' || typeUser === 'admin' ? 'main': ''" class="p-0 layout-navbar">
+        <header *ngIf="shown" class='mb-3'>
             <nav aria-describedby="navbar" aria-label="navbar for sidebar" class="navbar navbar-expand navbar-light ">
                 <div class="container-fluid">
                     <a (click)="showHideSideBar($event)" class="burger-btn d-block" href="#" type="button">

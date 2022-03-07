@@ -95,7 +95,7 @@
                 </div>
                 <div class="form-check form-check-inline" *ngIf="typeUser === 'admin'">
                     <input (change)="changeTypeUserToAdd($event)" class="form-check-input" formControlName="typeUser"
-                           id="inlineRadio1" name="typeUser" type="radio" value="school">
+                           id="inlineRadio1" name="typeUser" type="radio" value="school" checked>
                     <label class="form-check-label" for="inlineRadio1">مدرسة</label>
                 </div>
                 <div class="form-check form-check-inline mb-3"  *ngIf="typeUser === 'admin'">
@@ -158,7 +158,7 @@
                     <label class="col-sm-4 col-lg-2 col-form-label text-center">الموقع</label>
                     <div
                          class="col-sm-8 col-lg-10 row">
-                        <div class="mb-sm-2 align-self-center form-group col-lg-4 col-md-6 colk-sm-12 row">
+                        <div class="mb-sm-2 align-self-center form-group col-lg-4 colk-sm-12 row">
                             <label class="col-4 col-form-label" for="governorate">الولاية</label>
                             <div class="col-8">
                                 <input class="form-control-sm form-control" formControlName="governorate"
@@ -166,7 +166,7 @@
                                        type="text">
                             </div>
                         </div>
-                        <div class="mb-sm-2 form-group align-self-center col-lg-4 col-md-6 colk-sm-12 row">
+                        <div class="mb-sm-2 form-group align-self-center col-lg-4 colk-sm-12 row">
                             <label class="col-4 col-form-label" for="delegation">المعتمدية</label>
                             <div class="col-8">
                                 <input class="form-control-sm form-control" formControlName="delegation" id="delegation"
@@ -174,7 +174,7 @@
                             </div>
                         </div>
                         <div
-                             class="mb-sm-2 form-group align-self-center col-lg-4 col-md-6 colk-sm-12 row">
+                             class="mb-sm-2 form-group align-self-center col-lg-4 colk-sm-12 row">
                             <label class="col-7 col-form-label" for="zipCode">الترقيم البريدي</label>
                             <div class="col-5">
                                 <input class="form-control-sm  form-control" formControlName="zipCode" id="zipCode"

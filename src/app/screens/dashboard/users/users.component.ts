@@ -17,7 +17,7 @@ export class UsersComponent extends DynamicTableCrud<Person> implements OnInit {
     @ViewChild('addUserForm') addUserForm !: ElementRef;
 
     constructor(protected service: AbstractRestService<Person>, protected secureStorageService: SecureStorageService) {
-        super(service, `${environment.url}/api/persons`);
+        super(service, `${environment.url}/api/persons`, secureStorageService);
     }
 
     async ngOnInit(): Promise<void> {
@@ -26,29 +26,25 @@ export class UsersComponent extends DynamicTableCrud<Person> implements OnInit {
             telephone: new FormControl('', [Validators.required]),
             loginNumber: new FormControl('', [Validators.required]),
             password: new FormControl('', [Validators.required, Validators.minLength(8)]),
-            email: new FormControl('', [])
+            email: new FormControl('', []),
+            delegation: new FormControl('', [Validators.required]),
+            governorate: new FormControl('', [Validators.required]),
+            zipCode: new FormControl('', [Validators.required])
         });
         this.typeUser = localStorage.getItem('typeUser');
-        if (this.typeUser === 'superdoctor' || this.typeUser === 'school' || this.typeUser === 'admin') {
-            if (this.typeUser === 'admin') {
-                this.formGroup.addControl('typeUser', new FormControl('', [Validators.required]));
-            }
-            this.formGroup.addControl('familyName', new FormControl('', [Validators.required]));
-            if (this.typeUser === 'superdoctor') {
-                this.formGroup.addControl('speciality', new FormControl('', [Validators.required]));
-            }
+        if (this.typeUser === 'admin') {
+            this.formGroup.addControl('typeUser', new FormControl('', [Validators.required]));
         }
-        this.formGroup.addControl('delegation', new FormControl('', [Validators.required]));
-        this.formGroup.addControl('governorate', new FormControl('', [Validators.required]));
-        this.formGroup.addControl('zipCode', new FormControl('', [Validators.required]));
+        else if (this.typeUser === 'superdoctor') {
+                this.formGroup.addControl('speciality', new FormControl('', [Validators.required]));
+        }
         await this.getData();
     }
 
     async change_data(event: any): Promise<void> {
         event.preventDefault();
         const typeUser = event.target.value;
-        this.options.params = {typeUser};
-        await this.getData();
+        await this.getData({typeUser});
     }
 
     async addUser($event: Event): Promise<void> {

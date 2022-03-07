@@ -14,8 +14,8 @@ import { environment } from '../../../../environments/environment';
 export class MessagesComponent extends DynamicTableCrud<Message> implements OnInit {
     formGroup !: FormGroup;
     @ViewChild('messages') messages !: ElementRef;
-    constructor(protected service: AbstractRestService<Message>, private secureStorage: SecureStorageService) {
-        super(service, `${environment.url}/api/messages`);
+    constructor(protected service: AbstractRestService<Message>, protected secureStorage: SecureStorageService) {
+        super(service, `${environment.url}/api/messages`, secureStorage);
     }
     async ngOnInit(): Promise<void> {
         this.formGroup = new FormGroup({

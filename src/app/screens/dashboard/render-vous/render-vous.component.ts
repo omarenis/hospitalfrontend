@@ -24,8 +24,8 @@ export class RenderVousComponent extends DynamicTableCrud<RendezVous> implements
     index!: number;
 
     constructor(protected service: AbstractRestService<RendezVous>, private parentService: AbstractRestService<Person>,
-                private secureStorageService: SecureStorageService) {
-        super(service, `${environment.url}/api/patients/consultations`);
+                protected secureStorageService: SecureStorageService) {
+        super(service, `${environment.url}/api/patients/consultations`, secureStorageService);
     }
 
     async ngOnInit(): Promise<void> {

@@ -18,7 +18,7 @@ export class PatientsComponent extends DynamicTableCrud<Patient> implements OnIn
     typeUser !: string | null;
 
     constructor(protected service: AbstractRestService<Patient>, protected secureStorageService: SecureStorageService) {
-        super(service, `${environment.url}/api/patients`);
+        super(service, `${environment.url}/api/patients`, secureStorageService);
     }
 
     async ngOnInit(): Promise<void> {

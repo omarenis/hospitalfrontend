@@ -26,8 +26,6 @@ export class AppComponent implements OnInit{
     name !: string;
     familyName !: string;
     typeUser !: string | null;
-    isDoctor  !: boolean;
-    isAdmin !: boolean;
 
     constructor(private loginService: LoginSignupService, private router: Router, private domSanitizer: DomSanitizer,
                 private secureStorageService: SecureStorageService,
@@ -48,8 +46,7 @@ export class AppComponent implements OnInit{
                 this.familyName = localStorage.getItem('familyName') || '';
             }
             this.connected = localStorage.getItem('access') !== null;
-            this.isDoctor = localStorage.getItem('typeUser') === 'dcotor';
-            this.isAdmin = localStorage.getItem('typeUser') === 'admin';
+            this.shown = localStorage.getItem('typeUser') !== 'parent' && localStorage.getItem('typeUser') !== 'teacher';
         }
     }
 
@@ -71,18 +68,18 @@ export class AppComponent implements OnInit{
             response.access = this.secureStorageService.setToken(response.access);
             response.refresh = this.secureStorageService.setToken(response.refresh);
             saveDataToLocalhost(response);
+            this.signInModal.nativeElement.click();
             this.typeUser = response.typeUser;
             this.name = response.name;
             this.familyName = response.familyName === undefined || response.familyName === null ? '' : response.familyName;
-            this.signInModal.nativeElement.click();
             this.validated = true;
             this.notify = true;
             let url: string;
             if (this.typeUser === 'doctor' || this.typeUser === 'superdoctor') {
-                this.isDoctor = true;
+                this.shown = true;
                 url = '/dashboard/patients';
             } else if (this.typeUser === 'admin') {
-                this.isAdmin = true;
+                this.shown = true;
                 url = '/dashboard/users';
             } else {
                 url = '/landing/home';
@@ -108,8 +105,7 @@ export class AppComponent implements OnInit{
                 localStorage.clear();
                 this.typeUser = null;
                 this.connected = false;
-                this.isAdmin = false;
-                this.isDoctor = false;
+                this.shown = false;
                 this.router.navigate(['/landing/home']);
             }).catch((error) => console.log(error));
         }
