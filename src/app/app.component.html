@@ -1,5 +1,5 @@
 <div id="app">
-    <nav *ngIf="!isDoctor && !isAdmin " aria-label="navbar"
+    <nav *ngIf="typeUser !== 'admin' && typeUser !== 'superdoctor' && typeUser !== 'doctor'" aria-label="navbar"
          class="navbar container-fluid p-0 m-0 navbar-expand-lg navbar-light">
         <div class="container-fluid m-0 p-0 border-0 mobile-version">
             <ul class="nav justify-content-between m-0 p-0 navbar-toggler w-100 border-0">
@@ -78,7 +78,7 @@
             </div>
         </div>
     </nav>
-    <ul *ngIf="!isDoctor && !isAdmin"
+    <ul *ngIf="typeUser !== 'admin' && typeUser !== 'superdoctor' && typeUser !== 'doctor'"
         class="nav flex-row justify-content-lg-center mt-1 justify-content-md-around p-0 d-none d-lg-flex">
         <li class="nav-item p-1">
             <a class="nav-link text-dark" routerLink="landing/news">أخبارنا</a>
@@ -103,7 +103,7 @@
             </form>
         </li>
     </ul>
-    <nav *ngIf="!isDoctor && !isAdmin" aria-labelledby="offcanvasExampleLabel"
+    <nav *ngIf="typeUser !== 'admin' && typeUser !== 'doctor' && typeUser !== 'superdoctor'" aria-labelledby="offcanvasExampleLabel"
          class="offcanvas offcanvas-start custom-bg h-auto navbar-nav-scroll"
          data-bs-scroll="true" id="offcanvasExample" style="width: 60%" tabindex="-1">
         <ul class="nav d-block p-1 custom-bg">
@@ -229,9 +229,9 @@
             </div>
         </div>
     </form>
-    <div *ngIf="connected && (isDoctor || isAdmin)" [ngClass]="{'active sidebar-wrapper': show, 'd-none': !show}"
+    <div *ngIf="connected && typeUser !== 'parent' && typeUser !== 'teacher'" [ngClass]="{'active sidebar-wrapper': show, 'd-none': !show}"
          id="sidebar">
-        <div *ngIf="isAdmin" class="sidebar-header">
+        <div *ngIf="typeUser == 'admin'" class="sidebar-header">
             <div class="d-flex justify-content-between">
                 <div class="logo">
                     <a routerLink="/dashboard">
