@@ -18,12 +18,9 @@ export interface Patient {
     name: string;
     familyName: string;
     birthdate: Date | string;
-    school: string;
     sick?: boolean;
     supervise?: Supervise;
     doctor_id?: number;
-    parent_id?: number;
-    teacher_id?: number;
     id?: number;
     parent?: Person;
     teacher?: Person;

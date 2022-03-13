@@ -1,56 +1,154 @@
 <div id="app">
-    <nav *ngIf="typeUser !== 'admin' && typeUser !== 'superdoctor' && typeUser !== 'doctor'" aria-label="navbar"
-         class="navbar container-fluid p-0 m-0 navbar-expand-lg navbar-light">
-        <div class="container-fluid m-0 p-0 border-0 mobile-version">
-            <ul class="nav justify-content-between m-0 p-0 navbar-toggler w-100 border-0">
-                <li class="nav-item">
-                    <a class="btn btn-outline-white btn-link text-white customHover border-0 p-0"
-                       routerLink="/" type="button">
-                        <img alt="logo" class="logo" src="/assets/ifhimni.jpg"/>
-                    </a>
-                    <a class="nav-link text-white customHover" style="border-left: 1px solid white; height: 38px"
-                       type="button">logo</a>
-                </li>
-                <li class="nav-item">
-                    <a aria-controls="offcanvasExample" class="nav-link text-white customHover"
-                       data-bs-target="#offcanvasExample" data-bs-toggle="offcanvas"
-                       style="border-right: 1px solid white; height: 38px"
-                       type="button">
-                        <em class="material-icons white">menu</em>
-                    </a>
-                </li>
-            </ul>
-            <div class="collapse navbar-collapse p-0 border-0">
-                <ul class="navbar-nav pe-0 w-100 justify-content-between">
-                    <li class="nav-item pe-auto">
-                        <a class="btn btn-outline-white btn-link text-white customHover border-0 bg-transparent p-0"
-                           data-bs-target="#age"
+    <ng-container *ngIf="public">
+        <nav aria-label="navbar"
+             class="navbar container-fluid p-0 m-0 navbar-expand-lg navbar-light">
+            <div class="container-fluid m-0 p-0 border-0 mobile-version">
+                <ul class="nav justify-content-between m-0 p-0 navbar-toggler w-100 border-0">
+                    <li class="nav-item">
+                        <a class="btn btn-outline-white btn-link text-white customHover border-0 p-0"
                            routerLink="/" type="button">
                             <img alt="logo" class="logo" src="/assets/ifhimni.jpg"/>
                         </a>
+                        <a class="nav-link text-white customHover" style="border-left: 1px solid white; height: 38px"
+                           type="button">logo</a>
                     </li>
-                    <li class="nav-item pe-auto">
-                        <a class="nav-link text-white align-effect" routerLink="/">الرئيسية</a>
+                    <li class="nav-item">
+                        <a aria-controls="offcanvasExample" class="nav-link text-white customHover"
+                           data-bs-target="#offcanvasExample" data-bs-toggle="offcanvas"
+                           style="border-right: 1px solid white; height: 38px"
+                           type="button">
+                            <em class="material-icons white">menu</em>
+                        </a>
                     </li>
-                    <li class="nav-item pe-auto">
-                        <a class="nav-link text-white align-effect" routerLink="landing/about">من نحن ؟</a>
-                    </li>
-                    <li class="nav-item pe-auto">
-                        <a class="nav-link text-white align-effect" routerLink="landing/howto">كيف يقع تقصي
-                            اضطراب
-                            تشتت الانتباه و فرط
-                            الحركة</a>
-                    </li>
-                    <li class="nav-item pe-auto">
-                        <a class="nav-link text-white align-effect mt-1" routerLink="landing/join">للمشاركة</a>
-                    </li>
-                    <li *ngIf="!connected" class="nav-item me-0">
-                        <button class="btn nav-link text-white customHover" data-bs-target="#signInModal"
-                                data-bs-toggle="modal"
-                                style="border-right: 1px solid white;" type="button">تسجيل الدخول
-                        </button>
                 </ul>
-                <div *ngIf="connected" class="d-flex me-auto dropdown">
+                <div class="collapse navbar-collapse p-0 border-0">
+                    <ul class="navbar-nav pe-0 w-100 justify-content-between">
+                        <li class="nav-item pe-auto">
+                            <a class="btn btn-outline-white btn-link text-white customHover border-0 bg-transparent p-0"
+                               data-bs-target="#age"
+                               routerLink="/" type="button">
+                                <img alt="logo" class="logo" src="/assets/ifhimni.jpg"/>
+                            </a>
+                        </li>
+                        <li class="nav-item pe-auto">
+                            <a class="nav-link text-white align-effect" routerLink="/">الرئيسية</a>
+                        </li>
+                        <li class="nav-item pe-auto">
+                            <a class="nav-link text-white align-effect" routerLink="landing/about">من نحن ؟</a>
+                        </li>
+                        <li class="nav-item pe-auto">
+                            <a class="nav-link text-white align-effect" routerLink="landing/howto">كيف يقع تقصي
+                                اضطراب
+                                تشتت الانتباه و فرط
+                                الحركة</a>
+                        </li>
+                        <li class="nav-item pe-auto">
+                            <a class="nav-link text-white align-effect mt-1" routerLink="{{connected ? 'landing/join' : 'login'}}">للمشاركة</a>
+                        </li>
+                        <li *ngIf="!connected" class="nav-item me-0">
+                            <a class="btn nav-link text-white customHover" routerLink="login"
+                               style="border-right: 1px solid white;" type="button">تسجيل الدخول
+                            </a>
+                    </ul>
+                    <div *ngIf="connected" class="d-flex me-auto dropdown">
+                        <a aria-expanded="false"
+                           aria-haspopup="true"
+                           class="nav-link dropdown-toggle me-1 nav-link navbar-brand text-white mt-1"
+                           data-bs-toggle="dropdown" type="button">
+                            <em class="material-icons">person</em>
+                            {{name + ' ' + familyName}}
+                        </a>
+                        <div aria-labelledby="dropdownMenuButton" class="dropdown-menu">
+                            <a class="dropdown-item" routerLink="profile">الملف الشخصي</a>
+                            <a class="dropdown-item" routerLink="/dashboard/patients">الاطفال</a>
+                            <a class="dropdown-item" routerLink="/dashboard/rendez-vous">جدول المواعيد</a>
+                            <button (click)="logout()" class="dropdown-item" type="button">تسجيل الخروج</button>
+                        </div>
+                        <div class="nav-item pe-auto">
+                            <a class="nav-link text-white p-2 m-0">
+                                <em class="material-icons">notifications</em>
+                            </a>
+                        </div>
+                        <div class="nav-item pe-auto">
+                            <a class="nav-link me-1 nav-link navbar-brand text-white p-2">
+                                <em class="material-icons">email</em>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <ul class="nav flex-row justify-content-lg-center mt-1 justify-content-md-around p-0 d-none d-lg-flex">
+            <li class="nav-item p-1">
+                <a class="nav-link text-dark" routerLink="landing/news">أخبارنا</a>
+            </li>
+            <li class="nav-item p-1">
+                <a class="nav-link text-dark" routerLink="landing/news"> أخر المستجدات
+                </a>
+            </li>
+            <li class="nav-item p-1">
+                <a class="nav-link text-dark" routerLink="landing/workshops"> الدورات التكوينية</a>
+            </li>
+            <li class="nav-item p-1">
+                <a class="nav-link text-dark" routerLink="landing/seminars">الندوات العلمية</a>
+            </li>
+            <li class="nav-item p-1">
+                <a class="nav-link text-dark" href="#">المؤتمرات</a>
+            </li>
+            <li class="nav-item p-2">
+                <form action="" class="nav-item d-flex" method="post" style="height: 30px; margin-top: 3px">
+                    <input aria-label="Search" class="form-control me-2 rounded-pill" id="input" placeholder="البحث"
+                           type="search">
+                </form>
+            </li>
+        </ul>
+        <nav aria-labelledby="offcanvasExampleLabel"
+             class="offcanvas offcanvas-start custom-bg h-auto navbar-nav-scroll"
+             data-bs-scroll="true" id="offcanvasExample" style="width: 60%" tabindex="-1">
+            <ul class="nav d-block p-1 custom-bg">
+                <li class="nav-item">
+                    <a class="nav-link text-white align-effect" data-bs-dismiss="offcanvas" routerLink="/">الرئيسية</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white align-effect" data-bs-dismiss="offcanvas"
+                       routerLink="landing/about">من نحن ؟</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white align-effect" data-bs-dismiss="offcanvas"
+                       routerLink="landing/howto">كيف يقع تقصي اضطراب تشتت الانتباه و فرط
+                        الحركة</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white align-effect" routerLink="landing/join">للمشاركة</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white align-effect p-2" routerLink="/signup">انضم الينا</a>
+                </li>
+                <li class="nav-item pe-auto">
+                    <a class="nav-link text-white align-effect mt-1" routerLink="landing/join">للمشاركة</a>
+                </li>
+                <li class="nav-item mt-5">
+                    <a class="nav-link text-white align-effect p-2" routerLink="landing/news">أخبارنا</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white align-effect p-2" routerLink="landing/news"> أخر المستجدات</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white align-effect p-2" routerLink="landing/workshops"> الدورات
+                        التكوينية</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white align-effect p-2" routerLink="landing/seminars">الندوات العلمية</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white align-effect p-2" href="#">المؤتمرات</a>
+                </li>
+                <li *ngIf="!connected" class="nav-item me-0 pe-auto">
+                    <a class="nav-link text-white p-2" data-bs-target="#signInModal" data-bs-toggle="modal"
+                       type="button">تسجيل
+                        الدخول</a>
+                </li>
+                <li *ngIf="connected" class="d-flex me-auto dropdown">
                     <a aria-expanded="false"
                        aria-haspopup="true"
                        class="nav-link dropdown-toggle me-1 nav-link navbar-brand text-white mt-1"
@@ -74,169 +172,16 @@
                             <em class="material-icons">email</em>
                         </a>
                     </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-    <ul *ngIf="typeUser !== 'admin' && typeUser !== 'superdoctor' && typeUser !== 'doctor'"
-        class="nav flex-row justify-content-lg-center mt-1 justify-content-md-around p-0 d-none d-lg-flex">
-        <li class="nav-item p-1">
-            <a class="nav-link text-dark" routerLink="landing/news">أخبارنا</a>
-        </li>
-        <li class="nav-item p-1">
-            <a class="nav-link text-dark" routerLink="landing/news"> أخر المستجدات
-            </a>
-        </li>
-        <li class="nav-item p-1">
-            <a class="nav-link text-dark" routerLink="landing/workshops"> الدورات التكوينية</a>
-        </li>
-        <li class="nav-item p-1">
-            <a class="nav-link text-dark" routerLink="landing/seminars">الندوات العلمية</a>
-        </li>
-        <li class="nav-item p-1">
-            <a class="nav-link text-dark" href="#">المؤتمرات</a>
-        </li>
-        <li class="nav-item p-2">
-            <form action="" class="nav-item d-flex" method="post" style="height: 30px; margin-top: 3px">
-                <input aria-label="Search" class="form-control me-2 rounded-pill" id="input" placeholder="البحث"
-                       type="search">
-            </form>
-        </li>
-    </ul>
-    <nav *ngIf="typeUser !== 'admin' && typeUser !== 'doctor' && typeUser !== 'superdoctor'" aria-labelledby="offcanvasExampleLabel"
-         class="offcanvas offcanvas-start custom-bg h-auto navbar-nav-scroll"
-         data-bs-scroll="true" id="offcanvasExample" style="width: 60%" tabindex="-1">
-        <ul class="nav d-block p-1 custom-bg">
-            <li class="nav-item">
-                <a class="nav-link text-white align-effect" data-bs-dismiss="offcanvas" routerLink="/">الرئيسية</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white align-effect" data-bs-dismiss="offcanvas"
-                   routerLink="landing/about">من نحن ؟</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white align-effect" data-bs-dismiss="offcanvas"
-                   routerLink="landing/howto">كيف يقع تقصي اضطراب تشتت الانتباه و فرط
-                    الحركة</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white align-effect" routerLink="landing/join">للمشاركة</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white align-effect p-2" routerLink="/signup">انضم الينا</a>
-            </li>
-            <li class="nav-item pe-auto">
-                <a class="nav-link text-white align-effect mt-1" routerLink="landing/join">للمشاركة</a>
-            </li>
-            <li class="nav-item mt-5">
-                <a class="nav-link text-white align-effect p-2" routerLink="landing/news">أخبارنا</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white align-effect p-2" routerLink="landing/news"> أخر المستجدات</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white align-effect p-2" routerLink="landing/workshops"> الدورات التكوينية</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white align-effect p-2" routerLink="landing/seminars">الندوات العلمية</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white align-effect p-2" href="#">المؤتمرات</a>
-            </li>
-            <li *ngIf="!connected" class="nav-item me-0 pe-auto">
-                <a class="nav-link text-white p-2" data-bs-target="#signInModal" data-bs-toggle="modal" type="button">تسجيل
-                    الدخول</a>
-            </li>
-            <li *ngIf="connected" class="d-flex me-auto dropdown">
-                <a aria-expanded="false"
-                   aria-haspopup="true"
-                   class="nav-link dropdown-toggle me-1 nav-link navbar-brand text-white mt-1"
-                   data-bs-toggle="dropdown" type="button">
-                    <em class="material-icons">person</em>
-                    {{name + ' ' + familyName}}
-                </a>
-                <div aria-labelledby="dropdownMenuButton" class="dropdown-menu">
-                    <a class="dropdown-item" routerLink="profile">الملف الشخصي</a>
-                    <a class="dropdown-item" routerLink="/dashboard/patients">الاطفال</a>
-                    <a class="dropdown-item" routerLink="/dashboard/rendez-vous">جدول المواعيد</a>
-                    <button (click)="logout()" class="dropdown-item" type="button">تسجيل الخروج</button>
-                </div>
-                <div class="nav-item pe-auto">
-                    <a class="nav-link text-white p-2 m-0">
-                        <em class="material-icons">notifications</em>
-                    </a>
-                </div>
-                <div class="nav-item pe-auto">
-                    <a class="nav-link me-1 nav-link navbar-brand text-white p-2">
-                        <em class="material-icons">email</em>
-                    </a>
-                </div>
-            </li>
-        </ul>
-    </nav>
-    <form #signInModal *ngIf="!connected" [formGroup]="signInGroup" aria-hidden="true" aria-labelledby="signInModal"
-          class="modal fade" id="signInModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="d-flex align-items-center border-0">
-                        <div class="tab-content w-75" id="v-pills-tabContent">
-                            <div aria-labelledby="v-pills-home-tab" class="tab-pane fade show active" id="v-pills-home"
-                                 role="tabpanel">
-                                <h1 class="h1 text-center w-100">تسجيل الدخول</h1>
-                                <p *ngIf="validated === false" class="alert alert-danger">{{error}}</p>
-                                <div class="mb-3">
-                                    <label class="form-label bold mt-2" for="loginNumber" style="padding-right: 1em">
-                                        رقم بطاقة التعريف الوطنية
-                                    </label>
-                                    <input class="form-control" formControlName="loginNumber" id="loginNumber" type="text">
-                                    <div class="mb-3 border-1">
-                                        <label class="form-label bold mt-2" for="password" style="padding-right: 1em">كلمة
-                                            السر</label>
-                                        <div class="input-group">
-                                            <input [type]="shown === true ? 'text' : 'password'" class="form-control"
-                                                   formControlName="password" id="password">
-                                            <button (click)="showOrHidePassword($event)"
-                                                    class="input-group-text bg-transparent border-0">
-                                                <em class="material-icons">{{shown ? 'visibility' : 'visibility_off'}}</em>
-                                            </button>
-                                            <button (click)="login($event)" [disabled]="signInGroup.invalid"
-                                                    class="btn btn-primary w-100 text-center mt-3" id="success"
-                                                    type="submit">الدخول
-                                            </button>
-                                            <a class="nav-link text-center mt-1 w-100" href="#">هل نسيت كلمة السر ؟</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div aria-orientation="vertical" class="nav flex-column border-0 nav-tabs w-25" id="v-pills-tab"
-                             role="tablist" style="margin-right: 2rem">
-                            <a aria-controls="v-pills-home" aria-selected="false"
-                               class="bold btn btn-success text-center mb-5 w-75 me-1"
-                               data-bs-target="#v-pills-home" data-bs-toggle="pill" id="v-pills-home-tab" role="tab"
-                               type="button">الدخول
-                            </a>
-                            <a aria-controls="v-pills-profile" aria-selected="false"
-                               class="custom-border text-dark text-center text-white btn btn-dark w-75"
-                               data-bs-dismiss="modal" data-bs-target="#v-pills-profile" data-bs-toggle="pill"
-                               id="v-pills-profile-tab" role="tab" routerLink="/signup" style="border-color: #aaaaaa"
-                               type="button">التسجيل
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-    <div *ngIf="connected && typeUser !== 'parent' && typeUser !== 'teacher'" [ngClass]="{'active sidebar-wrapper': show, 'd-none': !show}"
-         id="sidebar">
+                </li>
+            </ul>
+        </nav>
+    </ng-container>
+    <div *ngIf="!public" [ngClass]="{'active sidebar-wrapper': show, 'd-none': !show}" id="sidebar">
         <div *ngIf="typeUser == 'admin'" class="sidebar-header">
             <div class="d-flex justify-content-between">
                 <div class="logo">
                     <a routerLink="/dashboard">
-                        <img alt="Logo" src="/assets/adminlogo.jpg"
-                             srcset="" style="width: 200px; height: 50px">
+                        <img alt="Logo" src="/assets/adminlogo.jpg" style="width: 200px; height: 50px">
                     </a>
                 </div>
                 <div class="toggler">
@@ -260,7 +205,7 @@
                 </ng-container>
                 <li class="sidebar-item">
                     <a class='sidebar-link text-center' routerLink="/dashboard/users">
-                        <span>قائمة {{typeUser === 'admin'? ' مستعملي المنصة' : (typeUser === 'superdoctor' ? 'اﻷطباء' : 'المربيين') }}</span>
+                        <span>قائمة {{typeUser === 'admin' ? ' مستعملي المنصة' : (typeUser === 'superdoctor' ? 'اﻷطباء' : 'المربيين') }}</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -299,8 +244,8 @@
         </div>
         <button class="sidebar-toggler btn x"><em data-feather="x"></em></button>
     </div>
-    <div [id]="typeUser === 'doctor' || typeUser === 'admin' ? 'main': ''" class="p-0 layout-navbar">
-        <header *ngIf="shown" class='mb-3'>
+    <div [id]="!public ? 'main': ''" class="p-0 layout-navbar">
+        <header *ngIf="!public && shown" class='mb-3'>
             <nav aria-describedby="navbar" aria-label="navbar for sidebar" class="navbar navbar-expand navbar-light ">
                 <div class="container-fluid">
                     <a (click)="showHideSideBar($event)" class="burger-btn d-block" href="#" type="button">

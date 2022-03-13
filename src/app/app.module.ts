@@ -36,6 +36,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthenticationInterceptor} from './interceptors/authentication.interceptor';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {LoginComponent} from './screens/login/login.component';
+import {DashboardComponent} from './screens/dashboard/dashboard.component';
 
 const routerOptions: ExtraOptions = {
     scrollPositionRestoration: 'enabled',
@@ -43,13 +45,16 @@ const routerOptions: ExtraOptions = {
 };
 const routes: Routes = [
     {
-        path: '', redirectTo: 'landing/home', pathMatch: 'full'
+        path: '', redirectTo: '/landing/home', pathMatch: 'full'
+    },
+    {
+        path: 'orientation', component: OrientationComponent
     },
     {
         path: 'signup', component: SignupComponent
     },
     {
-        path: 'orientation', component: OrientationComponent
+        path: 'login', component: LoginComponent
     },
     {
         path: 'form',
@@ -92,7 +97,7 @@ const routes: Routes = [
         path: 'profile', component: ProfileComponent, canActivate: [AuthenticatedGuard]
     },
     {
-        path: 'dashboard',
+        path: 'dashboard', component: DashboardComponent,
         children: [
             {
                 path: '', redirectTo: 'users', pathMatch: 'full'
@@ -161,7 +166,9 @@ const routes: Routes = [
         YouKnowComponent,
         NotFoundComponent,
         SignupComponent,
-        DiagnosticComponent
+        DiagnosticComponent,
+        LoginComponent,
+        DashboardComponent
     ],
     imports: [
         BrowserModule.withServerTransition({appId: 'serverApp'}),
