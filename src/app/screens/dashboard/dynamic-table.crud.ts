@@ -28,6 +28,7 @@ export class DynamicTableCrud<T> {
             this.options.params = params;
         }
         this.data = await this.service.list(this.actionUrl, this.options);
+        console.log(this.data);
         this.numberItems = this.data.length;
     }
 

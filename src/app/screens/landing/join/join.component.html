@@ -23,8 +23,7 @@
                                         اوافق على المشاركة
                                     </label>
                                     <div class="col-sm-9">
-                                        <button type="button" class="btn btn-success h-25" style="margin-top: 12px"
-                                                data-bs-toggle="modal" data-bs-target="#form"></button>
+                                        <a routerLink="/form/patients" type="button" class="btn btn-success h-25" style="margin-top: 12px">     </a>
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
@@ -41,24 +40,5 @@
                 </div>
             </li>
         </ol>
-    </div>
-</div>
-<div  #form aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="form" tabindex="-1">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">
-                    من أنت ؟
-                </h5>
-            </div>
-            <div class="d-flex container" style="margin: 2px">
-                <a  class="btn btn-primary w-25" data-bs-dismiss="modal" type="button" (click)="goToForm($event, 'parent')">
-                    ولي
-                </a>
-                <a  class="btn btn-primary w-25" style="margin-right: 50%" data-bs-dismiss="modal" type="button" (click)="goToForm($event, 'teacher')">
-                    مربي
-                </a>
-            </div>
-        </div>
     </div>
 </div>

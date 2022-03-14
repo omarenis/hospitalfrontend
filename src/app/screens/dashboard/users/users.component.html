@@ -44,8 +44,8 @@
         </select>
         <label for="floatingSelect">بحث بإستعمال نوع المستعمل</label>
     </div>
-    <button class="btn btn-success" data-bs-target="#formAddUser" data-bs-toggle="modal">
-       إضافة {{typeUser === 'admin' ? ' مدرسة أو طبيب أول' : (typeUser === 'superdoctor' ? 'طبيب' : 'مربي')}}
+    <button class="btn btn-success" data-bs-target="#formAddUser" data-bs-toggle="modal" (click)="openUserDialog()">
+        إضافة {{typeUser === 'admin' ? ' مدرسة أو طبيب أول' : (typeUser === 'superdoctor' ? 'طبيب' : 'مربي')}}
     </button>
 </div>
 <table aria-describedby="users" class="table mt-5">
@@ -68,11 +68,15 @@
         <td class="text-center" *ngIf="typeUser !== 'admin'">{{person.familyName}}</td>
         <td class="ltr-text text-center">{{person.telephone}}</td>
         <td class="text-center">{{person.email}}</td>
-        <td class="text-center" *ngIf="typeUser === 'admin'">{{person.typeUser}}</td>
+        <td class="text-center" *ngIf="typeUser === 'admin'">
+            <button class="btn btn-info" (click)="displayUser(i)" data-bs-target="#formAddUser" data-bs-toggle="modal">
+                {{person.typeUser}}
+            </button>
+        </td>
         <td class="text-center">
             <button *ngIf="person.typeUser !== 'admin'" class="btn btn-danger" style="width: 40px; height: 40px;"
                     type="button" (click)="delete(person.id, i)">
-                <em  class="material-icons" style="width: 20px; height: 30px">
+                <em class="material-icons" style="width: 20px; height: 30px">
                     person_remove_alt_1
                 </em>
             </button>
@@ -80,33 +84,38 @@
     </tr>
     </tbody>
 </table>
-<form #addUserForm (submit)="addUser($event)" [formGroup]="formGroup" aria-hidden="true" aria-labelledby="exampleModalLabel"
+<form #addUserForm (submit)="addUser($event)" [formGroup]="formGroup" aria-hidden="true"
+      aria-labelledby="exampleModalLabel"
       class="modal fade"
       id="formAddUser" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header w-100">
-                <h5 class="modal-title text-center text-danger" id="exampleModalLabel">{{typeUser === 'admin' ? 'إضافة مدرسة أو طبيب أول': (typeUser === 'superdoctor'? 'إضافة طبيب' : 'إضافة مربي')}}</h5>
+                <h5 class="modal-title text-center text-danger"
+                    id="exampleModalLabel">{{!displayPerson ? (typeUser === 'admin' ? 'إضافة مدرسة أو طبيب أول' : (typeUser === 'superdoctor' ? 'إضافة طبيب' : 'إضافة مربي')) : 'المعطيات الشخصية'}}</h5>
                 <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
             </div>
             <div class="modal-body">
-                <div class="form-check form-check-inline ml-5" *ngIf="typeUser === 'admin'">
+                <ng-container *ngIf="!displayPerson">
+                    <div class="form-check form-check-inline ml-5" *ngIf="typeUser === 'admin'">
                     <label class="form-check-label text-center" for="inlineRadio1">نوع المستعمل</label>
                 </div>
-                <div class="form-check form-check-inline" *ngIf="typeUser === 'admin'">
-                    <input (change)="changeTypeUserToAdd($event)" class="form-check-input" formControlName="typeUser"
-                           id="inlineRadio1" name="typeUser" type="radio" value="school" checked>
-                    <label class="form-check-label" for="inlineRadio1">مدرسة</label>
-                </div>
-                <div class="form-check form-check-inline mb-3"  *ngIf="typeUser === 'admin'">
-                    <input (change)="changeTypeUserToAdd($event)" class="form-check-input"
-                           formControlName="typeUser" id="inlineRadio2" name="typeUser" type="radio"
-                           value="superdoctor">
-                    <label class="form-check-label" for="inlineRadio2">طبيب أول</label>
-                </div>
+                    <div class="form-check form-check-inline" *ngIf="typeUser === 'admin'">
+                        <input (change)="changeTypeUserToAdd($event)" class="form-check-input"
+                               formControlName="typeUser"
+                               id="inlineRadio1" name="typeUser" type="radio" value="school" checked>
+                        <label class="form-check-label" for="inlineRadio1">مدرسة</label>
+                    </div>
+                    <div class="form-check form-check-inline mb-3" *ngIf="typeUser === 'admin'">
+                        <input (change)="changeTypeUserToAdd($event)" class="form-check-input"
+                               formControlName="typeUser" id="inlineRadio2" name="typeUser" type="radio"
+                               value="superdoctor">
+                        <label class="form-check-label" for="inlineRadio2">طبيب أول</label>
+                    </div>
+                </ng-container>
                 <div class="mb-3 row">
                     <label class="col-sm-4 col-lg-2 col-form-label text-center"
-                           for="name">إسم {{typeUser === 'admin' ? (isSuperDoctor ? 'و لقب الطبيب الأول' : ' المدرسة') : (typeUser === 'superdoctor' ? 'الطبيب' : 'المربي')}}</label>
+                           for="name">إسم {{displayPerson ? (typeDisplayedPerson === 'school' ? 'المدرسة' : (typeDisplayedPerson === 'superdoctor' ? 'الطبيب الأول' : ( typeDisplayedPerson === 'doctor' ? 'الطبيب': (typeDisplayedPerson === 'parent' ? 'الولي' : 'المربي')))) : (typeUser === 'admin' ? (isSuperDoctor ? 'و لقب الطبيب الأول' : ' المدرسة') : (typeUser === 'superdoctor' ? 'الطبيب' : 'المربي'))}}</label>
                     <div class="col-sm-8 col-lg-10">
                         <input class="form-control" formControlName="name" id="name" name="name" type="text">
                     </div>
@@ -115,7 +124,8 @@
                     <label class="col-sm-4 col-lg-2 col-form-label text-center"
                            for="name">لقب {{typeUser === 'school' ? 'المربي' : 'الطبيب'}}</label>
                     <div class="col-sm-8 col-lg-10">
-                        <input class="form-control" formControlName="familyName" id="familyName" name="familyName" type="text">
+                        <input class="form-control" formControlName="familyName" id="familyName" name="familyName"
+                               type="text">
                     </div>
                 </div>
                 <div class="mb-3 row" *ngIf="typeUser === 'superdoctor'">
@@ -154,10 +164,12 @@
                                type="password">
                     </div>
                 </div>
-                <div *ngIf="!isSuperDoctor || isSuperDoctor === null ||isSuperDoctor === undefined || typeUser !== 'admin'" class="row">
+                <div
+                    *ngIf="!isSuperDoctor || isSuperDoctor === null ||isSuperDoctor === undefined || typeUser !== 'admin'"
+                    class="row">
                     <label class="col-sm-4 col-lg-2 col-form-label text-center">الموقع</label>
                     <div
-                         class="col-sm-8 col-lg-10 row">
+                        class="col-sm-8 col-lg-10 row">
                         <div class="mb-sm-2 align-self-center form-group col-lg-4 colk-sm-12 row">
                             <label class="col-4 col-form-label" for="governorate">الولاية</label>
                             <div class="col-8">
@@ -174,7 +186,7 @@
                             </div>
                         </div>
                         <div
-                             class="mb-sm-2 form-group align-self-center col-lg-4 colk-sm-12 row">
+                            class="mb-sm-2 form-group align-self-center col-lg-4 colk-sm-12 row">
                             <label class="col-7 col-form-label" for="zipCode">الترقيم البريدي</label>
                             <div class="col-5">
                                 <input class="form-control-sm  form-control" formControlName="zipCode" id="zipCode"
@@ -184,7 +196,7 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" *ngIf="!displayPerson">
                 <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">إغلاق</button>
                 <button class="btn btn-primary" type="submit" [disabled]="formGroup.invalid">إضافة مستعمل</button>
             </div>

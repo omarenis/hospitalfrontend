@@ -53,7 +53,7 @@ export class SignupComponent implements OnInit {
                 zipCode: this.signupFormControl.value.zipCode
             }
         }).then(async () => {
-            await this.router.navigate(['/dashboard/patients']);
+            await this.router.navigate(['/']);
         }).catch((err: Error) => {
             console.log(err);
         });

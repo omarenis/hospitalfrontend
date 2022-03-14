@@ -8,22 +8,9 @@ import {Router} from '@angular/router';
     styleUrls: ['./join.component.css']
 })
 export class JoinComponent implements OnInit {
-    @ViewChild('form') formModal !: ElementRef;
 
     constructor(private router: Router) {
     }
 
     ngOnInit(): void {}
-
-    async goToForm(event: any, value: string): Promise<void> {
-        event.preventDefault();
-        if (value === 'teacher') {
-            localStorage.setItem('typeUser', 'teacher');
-            await this.router.navigate(['/form/teacher/1']);
-        } else {
-            localStorage.setItem('typeUser', 'parent');
-            await this.router.navigate(['/form/parent/1']);
-        }
-        this.formModal.nativeElement.click();
-    }
 }

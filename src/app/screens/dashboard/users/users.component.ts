@@ -14,6 +14,8 @@ export class UsersComponent extends DynamicTableCrud<Person> implements OnInit {
     typeUser: any;
     isSuperDoctor !: boolean;
     formGroup !: FormGroup;
+    displayPerson = false;
+    typeDisplayedPerson !: string;
     @ViewChild('addUserForm') addUserForm !: ElementRef;
 
     constructor(protected service: AbstractRestService<Person>, protected secureStorageService: SecureStorageService) {
@@ -49,7 +51,6 @@ export class UsersComponent extends DynamicTableCrud<Person> implements OnInit {
 
     async addUser($event: Event): Promise<void> {
         $event.preventDefault();
-        console.log(this.formGroup.value);
         let typeUser: string;
         if (this.typeUser === 'admin'){
             typeUser = this.formGroup.value.typeUser;
@@ -96,5 +97,30 @@ export class UsersComponent extends DynamicTableCrud<Person> implements OnInit {
             this.formGroup.addControl('zipCode', new FormControl('', [Validators.required]));
         }
         await this.getData();
+    }
+
+    displayUser(i: number): void {
+        this.displayPerson = true;
+        const person = this.data[i];
+        this.typeDisplayedPerson = person.typeUser;
+        console.log(person);
+        this.formGroup.setValue({
+            name: person.name,
+            typeUser: person.typeUser,
+            email: person.email,
+            governorate: person.localisation?.governorate,
+            delegation: person.localisation?.governorate,
+            zipCode: person.localisation?.zipCode,
+            password: person.password,
+            loginNumber: person.loginNumber,
+            telephone: person.telephone
+        });
+        if (person.typeUser !== 'school' && person.typeUser !== 'admin'){
+            this.formGroup.addControl('familyName', new FormControl(person.familyName, [Validators.required]));
+        }
+    }
+
+    openUserDialog(): void {
+        this.displayPerson = false;
     }
 }

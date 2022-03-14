@@ -1,0 +1,54 @@
+<form [formGroup]="formGroup" class="container d-flex justify-content-center mt-5" id="signInModal">
+    <div class="modal-dialog modal-dialog-centered shadow">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="d-flex align-items-center border-0">
+                    <div class="tab-content w-75" id="v-pills-tabContent">
+                        <div aria-labelledby="v-pills-home-tab" class="tab-pane fade show active" id="v-pills-home"
+                             role="tabpanel">
+                            <h1 class="h1 text-center w-100">تسجيل الدخول</h1>
+                            <p *ngIf="!validated" class="alert alert-danger">{{error}}</p>
+                            <div class="mb-3">
+                                <label class="form-label bold mt-2" for="loginNumber" style="padding-right: 1em">
+                                    رقم بطاقة التعريف الوطنية
+                                </label>
+                                <input class="form-control" formControlName="loginNumber" id="loginNumber" type="text">
+                                <div class="mb-3 border-1">
+                                    <label class="form-label bold mt-2" for="password" style="padding-right: 1em">كلمة
+                                        السر</label>
+                                    <div class="input-group">
+                                        <input [type]="shown ? 'text' : 'password'" class="form-control"
+                                               formControlName="password" id="password">
+                                        <button (click)="showOrHidePassword($event)"
+                                                class="input-group-text bg-transparent border-0">
+                                            <em class="material-icons">{{shown ? 'visibility' : 'visibility_off'}}</em>
+                                        </button>
+                                        <button (click)="submit($event)" [disabled]="formGroup.invalid"
+                                                class="btn btn-primary w-100 text-center mt-3" id="success"
+                                                type="submit">الدخول
+                                        </button>
+                                        <a class="nav-link text-center mt-1 w-100" href="#">هل نسيت كلمة السر ؟</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div aria-orientation="vertical" class="nav flex-column border-0 nav-tabs w-25" id="v-pills-tab"
+                         role="tablist" style="margin-right: 2rem">
+                        <a aria-controls="v-pills-home" aria-selected="false"
+                           class="bold btn btn-success text-center mb-5 w-75 me-1"
+                           data-bs-target="#v-pills-home" data-bs-toggle="pill" id="v-pills-home-tab" role="tab"
+                           type="button">الدخول
+                        </a>
+                        <a aria-controls="v-pills-profile" aria-selected="false"
+                           class="custom-border text-dark text-center text-white btn btn-dark w-75"
+                           data-bs-dismiss="modal" data-bs-target="#v-pills-profile" data-bs-toggle="pill"
+                           id="v-pills-profile-tab" role="tab" routerLink="/signup" style="border-color: #aaaaaa"
+                           type="button">التسجيل
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

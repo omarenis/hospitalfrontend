@@ -1,5 +1,6 @@
 <div class="container-fluid d-flex p-0 align-items-stretch justify-content-between">
-    <div [@routerAnimation]="getDepth(myOutlet)" class="container-fluid bd-highlight p-2 flex-fill flex-grow-2 d-block">
+    <div [@routerAnimation]="getDepth(myOutlet)"
+         class="container-fluid bd-highlight p-2 flex-fill flex-grow-2 d-block">
         <router-outlet #myOutlet="outlet"></router-outlet>
     </div>
 </div>
@@ -30,10 +31,12 @@
             </div>
             <div class="mb-3 d-flex justify-content-around container">
                 <label class="form-label" for="content">ارسال</label>
-                <button class="btn btn-success text-center" id="submit" type="submit" style="transform: rotate(180deg);">
+                <button class="btn btn-success text-center" id="submit" type="submit"
+                        style="transform: rotate(180deg);">
                     <em class="material-icons">send</em>
                 </button>
             </div>
         </form>
     </div>
 </div>
+
