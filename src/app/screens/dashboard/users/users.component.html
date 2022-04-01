@@ -115,14 +115,14 @@
                 </ng-container>
                 <div class="mb-3 row">
                     <label class="col-sm-4 col-lg-2 col-form-label text-center"
-                           for="name">إسم {{displayPerson ? (typeDisplayedPerson === 'school' ? 'المدرسة' : (typeDisplayedPerson === 'superdoctor' ? 'الطبيب الأول' : ( typeDisplayedPerson === 'doctor' ? 'الطبيب': (typeDisplayedPerson === 'parent' ? 'الولي' : 'المربي')))) : (typeUser === 'admin' ? (isSuperDoctor ? 'و لقب الطبيب الأول' : ' المدرسة') : (typeUser === 'superdoctor' ? 'الطبيب' : 'المربي'))}}</label>
+                           for="name">إسم {{displayPerson ? (typeDisplayedPerson === 'school' ? 'المدرسة' : (typeDisplayedPerson === 'superdoctor' ? 'الطبيب الأول' : ( typeDisplayedPerson === 'doctor' ? 'الطبيب': (typeDisplayedPerson === 'parent' ? 'الولي' : 'المربي')))) : (typeUser === 'admin' ? (isSuperDoctor ? ' الطبيب الأول' : ' المدرسة') : (typeUser === 'superdoctor' ? 'الطبيب' : 'المربي'))}}</label>
                     <div class="col-sm-8 col-lg-10">
                         <input class="form-control" formControlName="name" id="name" name="name" type="text">
                     </div>
                 </div>
-                <div class="mb-3 row" *ngIf="typeUser !== 'admin'">
+                <div class="mb-3 row" *ngIf="typeUser !== 'admin' || isSuperDoctor">
                     <label class="col-sm-4 col-lg-2 col-form-label text-center"
-                           for="name">لقب {{typeUser === 'school' ? 'المربي' : 'الطبيب'}}</label>
+                           for="name">لقب {{typeUser === 'school' ? 'المربي' : (typeUser === 'admin' ? 'الأول' : '') + 'الطبيب' }}</label>
                     <div class="col-sm-8 col-lg-10">
                         <input class="form-control" formControlName="familyName" id="familyName" name="familyName"
                                type="text">

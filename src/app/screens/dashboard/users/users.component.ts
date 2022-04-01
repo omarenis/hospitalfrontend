@@ -81,6 +81,7 @@ export class UsersComponent extends DynamicTableCrud<Person> implements OnInit {
     async changeTypeUserToAdd($event: any): Promise<void> {
         if ($event.target.value === 'superdoctor') {
             this.isSuperDoctor = true;
+            console.log(this.typeUser);
             if (this.formGroup.contains('governorate')) {
                 this.formGroup.removeControl('governorate');
                 this.formGroup.removeControl('delegation');
@@ -103,7 +104,6 @@ export class UsersComponent extends DynamicTableCrud<Person> implements OnInit {
         this.displayPerson = true;
         const person = this.data[i];
         this.typeDisplayedPerson = person.typeUser;
-        console.log(person);
         this.formGroup.setValue({
             name: person.name,
             typeUser: person.typeUser,
@@ -121,6 +121,7 @@ export class UsersComponent extends DynamicTableCrud<Person> implements OnInit {
     }
 
     openUserDialog(): void {
+        this.formGroup.reset();
         this.displayPerson = false;
     }
 }
