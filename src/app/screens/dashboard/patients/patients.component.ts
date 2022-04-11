@@ -16,7 +16,6 @@ export class PatientsComponent extends DynamicTableCrud<Patient> implements OnIn
     userId !: number;
     numberPatients !: number;
     typeUser !: string | null;
-
     constructor(protected service: AbstractRestService<Patient>, protected secureStorageService: SecureStorageService) {
         super(service, `${environment.url}/api/patients`, secureStorageService);
     }
@@ -31,7 +30,6 @@ export class PatientsComponent extends DynamicTableCrud<Patient> implements OnIn
             await this.getData();
         }
     }
-
     async getData(): Promise<void> {
         this.data = await this.service.list(this.actionUrl, this.options);
         this.numberPatients = this.data.length;

@@ -4,6 +4,8 @@ import {Person} from '../../../models/person';
 import {Supervise} from '../../../models/supervise';
 import {ActivatedRoute, Router} from '@angular/router';
 import {environment} from '../../../../environments/environment';
+import {Patient} from '../../../models/patient';
+import {SecureStorageService} from '../../../services/secure-storage.service';
 
 @Component({
     selector: 'app-orientation',
@@ -11,19 +13,36 @@ import {environment} from '../../../../environments/environment';
     styleUrls: ['./orientation.component.css']
 })
 export class OrientationComponent implements OnInit {
-    result!: string;
+    public isSick !: boolean | undefined;
     doctors !: Person[];
     patientId!: number;
     constructor(private service: AbstractRestService<Person>, private superviseService: AbstractRestService<Supervise>,
-                private activatedRoute: ActivatedRoute, private router: Router) {
+                private activatedRoute: ActivatedRoute, private router: Router, private patientService: AbstractRestService<Patient>,
+                private secureStorageService: SecureStorageService) {
     }
 
     ngOnInit(): void {
-        this.activatedRoute.params.subscribe((params) => {this.patientId = params.patientId; });
-        this.service.list(`${environment.url}/api/persons/doctors`)
-            .then((response: Person[]) => {
-            this.doctors = response;
+        // let patient: number | null | string = localStorage.getItem('patient');
+        // patient = patient !== null ? Number(patient) : null;
+        // if (patient !== null){
+        //     this.patientService.get(`${environment.url}/api/patients`, patient).then((patientData) => {
+        //         this.isSick = patientData.sick;
+        //     });
+        // }
+        const access = localStorage.getItem('access');
+        if (access !== null){
+            this.activatedRoute.params.subscribe((params) => {
+            console.log(params);
+            this.patientService.get(`${environment.url}/api/patients`, params.patientId,
+                {headers: {Authorization: `Bearer ${this.secureStorageService.getToken(access)}`}}).then((patient: Patient) => {
+                this.isSick = patient.sick;
+            });
         });
+        }
+        // this.service.list(`${environment.url}/api/persons/doctors`)
+        //     .then((response: Person[]) => {
+        //     this.doctors = response;
+        // });
     }
 
     selectSupervisor(id: number | undefined): void{

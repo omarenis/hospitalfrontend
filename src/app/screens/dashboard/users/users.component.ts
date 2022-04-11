@@ -37,8 +37,11 @@ export class UsersComponent extends DynamicTableCrud<Person> implements OnInit {
         if (this.typeUser === 'admin') {
             this.formGroup.addControl('typeUser', new FormControl('', [Validators.required]));
         }
-        else if (this.typeUser === 'superdoctor') {
+        else {
+            this.formGroup.addControl('familyName', new FormControl('', [Validators.required]));
+            if (this.typeUser === 'superdoctor') {
                 this.formGroup.addControl('speciality', new FormControl('', [Validators.required]));
+            }
         }
         await this.getData();
     }
@@ -51,6 +54,7 @@ export class UsersComponent extends DynamicTableCrud<Person> implements OnInit {
 
     async addUser($event: Event): Promise<void> {
         $event.preventDefault();
+        console.log(this.formGroup.value);
         let typeUser: string;
         if (this.typeUser === 'admin'){
             typeUser = this.formGroup.value.typeUser;
@@ -61,13 +65,15 @@ export class UsersComponent extends DynamicTableCrud<Person> implements OnInit {
             telephone: this.formGroup.value.telephone,
             typeUser,
             school_id: this.typeUser === 'school' ? localStorage.getItem('userId') : undefined,
+            is_super: this.typeUser === 'superdoctor' ? false : undefined,
+            super_doctor_id: this.typeUser === 'superdoctor' ? localStorage.getItem('userId') : undefined,
             name: this.formGroup.value.name,
             familyName: this.formGroup.value?.familyName,
             password: this.formGroup.value.password,
             speciality: this.formGroup.value?.speciality,
             loginNumber: this.formGroup.value.loginNumber,
             email: this.formGroup.value?.email,
-            localisation: this.formGroup.value.delegation === undefined ? undefined : {
+            localisation: this.formGroup.value.delegation === null ? null : {
                 governorate: this.formGroup.value.governorate,
                 delegation: this.formGroup.value.delegation,
                 zipCode: this.formGroup.value.zipCode
@@ -81,7 +87,6 @@ export class UsersComponent extends DynamicTableCrud<Person> implements OnInit {
     async changeTypeUserToAdd($event: any): Promise<void> {
         if ($event.target.value === 'superdoctor') {
             this.isSuperDoctor = true;
-            console.log(this.typeUser);
             if (this.formGroup.contains('governorate')) {
                 this.formGroup.removeControl('governorate');
                 this.formGroup.removeControl('delegation');
@@ -103,20 +108,27 @@ export class UsersComponent extends DynamicTableCrud<Person> implements OnInit {
     displayUser(i: number): void {
         this.displayPerson = true;
         const person = this.data[i];
+        console.log(person);
+        // console.log(person.typeUser !== 'admin' && person.typeUser !== 'superdoctor');
         this.typeDisplayedPerson = person.typeUser;
         this.formGroup.setValue({
             name: person.name,
             typeUser: person.typeUser,
             email: person.email,
-            governorate: person.localisation?.governorate,
-            delegation: person.localisation?.governorate,
-            zipCode: person.localisation?.zipCode,
             password: person.password,
             loginNumber: person.loginNumber,
             telephone: person.telephone
         });
-        if (person.typeUser !== 'school' && person.typeUser !== 'admin'){
-            this.formGroup.addControl('familyName', new FormControl(person.familyName, [Validators.required]));
+        if (person.typeUser !== 'admin' && person.typeUser !== 'superdoctor'){
+            console.log('localisation = ', person.localisation);
+            this.formGroup.controls.familyName.setValue(person.familyName);
+            this.formGroup.controls.governorate.setValue(person.localisation?.governorate);
+            this.formGroup.controls.delegation.setValue(person.localisation?.delegation);
+            this.formGroup.controls.zipCode.setValue(person.localisation?.zipCode);
+            if (person.typeUser !== 'school')
+            {
+                this.formGroup.addControl('familyName', new FormControl(person.familyName, [Validators.required]));
+            }
         }
     }
 

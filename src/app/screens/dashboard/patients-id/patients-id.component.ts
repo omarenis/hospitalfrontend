@@ -7,6 +7,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Response} from '../../../models/response';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {environment} from '../../../../environments/environment';
+import {SecureStorageService} from '../../../services/secure-storage.service';
 
 @Component({
     selector: 'app-patients-id',
@@ -22,7 +23,7 @@ export class PatientsIdComponent implements OnInit {
     typeUser !: string | null;
 
     constructor(private questionService: QuestionService, private patientService: AbstractRestService<Patient>,
-                private activatedRoute: ActivatedRoute) {
+                private activatedRoute: ActivatedRoute, private secureStorageService: SecureStorageService) {
     }
 
     ngOnInit(): void {
@@ -33,7 +34,7 @@ export class PatientsIdComponent implements OnInit {
             name: new FormControl('', [Validators.required]),
             familyName: new FormControl('', [Validators.required]),
             birthdate: new FormControl('', [Validators.required]),
-            school: new FormControl('', [Validators.required]),
+            school: new FormControl('', []),
             parentName: new FormControl(''),
             parentFamilyName: new FormControl(''),
             parentTelephone: new FormControl(''),
@@ -41,8 +42,13 @@ export class PatientsIdComponent implements OnInit {
         });
         this.questions = this.questionService.getParentQuestions();
         const data: any = {};
-        this.activatedRoute.params.subscribe(params => {
-            this.patientService.get(`${environment.url}/api/patients`, params.id).then((response: any) => {
+        const access = localStorage.getItem('access');
+        if (access !== null){
+            this.activatedRoute.params.subscribe(params => {
+            this.patientService.get(`${environment.url}/api/patients`, params.id, {
+                headers: {Authorization: `Bearer ${this.secureStorageService.getToken(access)}`}
+            }).then((response: any) => {
+                console.log(response);
                 this.sick = response.sick;
                 if (userId !== null && this.typeUser === 'doctor') {
                     if (response.supervise !== null && response.supervise !== undefined &&
@@ -56,17 +62,6 @@ export class PatientsIdComponent implements OnInit {
                             parentFamilyName: this.canEdit ? '' : response?.parent?.familyName,
                             parentTelephone: this.canEdit ? '' : response?.parent?.telephone,
                             parentEmail: this.canEdit ? '' : response?.parent?.email
-                        });
-                    } else {
-                        this.formGroup.setValue({
-                            name: 'XXXXXXXX',
-                            familyName: 'XXXXXXXX',
-                            birthdate: 'XXXXXXXX',
-                            school: 'XXXXXXXX',
-                            parentName: 'XXXXXXXX',
-                            parentFamilyName: 'XXXXXXXX',
-                            parentTelephone: 'XXXXXXXX',
-                            parentEmail: 'XXXXXXXX'
                         });
                     }
                 } else {
@@ -101,5 +96,6 @@ export class PatientsIdComponent implements OnInit {
                 });
             });
         });
+        }
     }
 }

@@ -47,7 +47,10 @@ export class LoginComponent implements OnInit {
             } else {
                 url = 'landing/join';
             }
-            this.connection.setConnection(true);
+            this.connection.setConnection({
+                typeUser: response.typeUser,
+                name: response.name
+            });
             await this.router.navigate([url]);
         }).catch((err) => {
             this.validated = false;

@@ -12,7 +12,6 @@ import {MessagesComponent} from './screens/dashboard/messages/messages.component
 import {PatientsComponent} from './screens/dashboard/patients/patients.component';
 import {PatientsIdComponent} from './screens/dashboard/patients-id/patients-id.component';
 import {ProfileComponent} from './screens/dashboard/profile/profile.component';
-import {RenderVousComponent} from './screens/dashboard/render-vous/render-vous.component';
 import {UsersComponent} from './screens/dashboard/users/users.component';
 import {FormIdComponent} from './screens/form/form-id/form-id.component';
 import {OrientationComponent} from './screens/form/orientation/orientation.component';
@@ -29,7 +28,6 @@ import {ExtraOptions, RouterModule, Routes} from '@angular/router';
 import {AuthenticatedGuard} from './authguard/authenticated.guard';
 import {IsadminGuard} from './authguard/is-admin.guard';
 import {MessageReplayComponent} from './screens/dashboard/messages/message-replay/message-replay.component';
-import {DiagnosticComponent} from './screens/dashboard/render-vous/diagnostic/diagnostic.component';
 import {IsdoctorGuard} from './authguard/is-doctor.guard';
 import {NotfoundComponent} from './screens/notfound/notfound.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -38,6 +36,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LoginComponent} from './screens/login/login.component';
 import {DashboardComponent} from './screens/dashboard/dashboard.component';
+import {DiagnosticComponent} from './screens/dashboard/consultations/diagnostic/diagnostic.component';
 
 const routerOptions: ExtraOptions = {
     scrollPositionRestoration: 'enabled',
@@ -103,7 +102,7 @@ const routes: Routes = [
                 path: '', redirectTo: 'users', pathMatch: 'full'
             },
             {
-                path: 'users', component: UsersComponent, canActivate: [IsadminGuard, AuthenticatedGuard]
+                path: 'users', component: UsersComponent, canActivate: [AuthenticatedGuard]
             },
             {
                 path: 'messages', canActivate: [AuthenticatedGuard],
@@ -153,7 +152,6 @@ const routes: Routes = [
         PatientsComponent,
         PatientsIdComponent,
         ProfileComponent,
-        RenderVousComponent,
         UsersComponent,
         FormIdComponent,
         OrientationComponent,

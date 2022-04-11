@@ -1,75 +1,90 @@
-<h1 class="h1 text-center mt-3 text-danger">معطيات حسابك</h1>
-<form (ngSubmit)="submit($event)" [formGroup]="formGroup" class="container-lg container-fluid w-responsive m-lg-auto row mt-4">
+<h1 class="h1 text-center text-danger">معطيات حسابك</h1>
+<form (ngSubmit)="submit($event)" [formGroup]="formGroup"
+      class="container-lg container-fluid w-responsive m-lg-auto row mt-4">
     <div class="col-sm-12 col-md-10 col-lg-6 row form-group mt-4">
-        <label class="col-lg-3 col-sm-4 col-form-label-sm text-center" for="name">اﻹسم الأول</label>
+        <label class="col-lg-4 col-md-3 col-sm-4 col-form-label-sm text-center" for="name">اﻹسم الأول</label>
         <div class="col-lg-8 col-md-9 col-sm-8">
             <input class="form-control-sm form-control" formControlName="name" id="name" type="text">
         </div>
     </div>
-    <div class="col-sm-12 col-md-10 col-lg-6 row form-group mt-4" *ngIf="typeUser !== 'admin'">
-        <label class="col-lg-3 col-sm-4 col-form-label-sm text-center" for="familyName">اسم العائلة</label>
+    <div *ngIf="typeUser !== 'admin'" class="col-sm-12 col-md-10 col-lg-6 row form-group mt-4">
+        <label class="col-lg-4 col-md-3 col-sm-4 col-form-label-sm text-center" for="familyName">اسم العائلة</label>
         <div class="col-lg-8 col-md-9 col-sm-8">
             <input class="form-control-sm form-control" formControlName="familyName" id="familyName" type="text">
         </div>
     </div>
     <div class="col-sm-12 col-md-10 col-lg-6 row form-group mt-4">
-        <label class="col-lg-3 col-sm-4 col-form-label-sm text-center" for="loginNumber">رقم بطاقة التعريف</label>
+        <label class="col-lg-4 col-md-3 col-sm-4 col-form-label-sm text-center" for="loginNumber">رقم بطاقة التعريف</label>
         <div class="col-lg-8 col-md-9 col-sm-8">
             <input class="form-control-sm form-control" formControlName="loginNumber" id="loginNumber" type="text">
         </div>
     </div>
     <div class="col-sm-12 col-md-10 col-lg-6 row form-group mt-4">
-        <label class="col-lg-3 col-sm-4 col-form-label-sm text-center" for="phone">رقم الهاتف</label>
+        <label class="col-lg-4 col-md-3 col-sm-4 col-form-label-sm text-center" for="phone">رقم الهاتف</label>
         <div class="col-lg-8 col-md-9 col-sm-8">
-            <input class="col-3 form-control-sm form-control" formControlName="telephone" id="phone" type="text">
+            <input class="form-control-sm form-control" formControlName="telephone" id="phone" type="text">
         </div>
     </div>
-    <div class="col-sm-12 col-md-10 align-items-center row mt-3" *ngIf="typeUser !== 'admin' && typeUser !== 'superdoctor'">
-        <label class="col-lg-2 w-25 col-md-3 col-sm-4 form-group col-form-label text-center">الموقع</label>
-        <div class="col-lg-10 row w-75 justify-content-between">
-            <div class="mb-sm-2 align-self-center form-group col-lg-3 col-md-6 col-sm-12 row">
-                <label class="col-4 col-form-label" for="governorate">الولاية</label>
-                <div class="col-8">
+    <div *ngIf="typeUser !== 'admin' && typeUser !== 'superdoctor'" class="col-12 align-items-center row mt-3">
+        <label class="col-lg-2 col-md-3 col-sm-4 form-group col-form-label text-center">الموقع</label>
+        <div class="col-lg-10 row justify-content-between">
+            <div class="mb-sm-2 align-self-center form-group col-lg-4 col-md-6 col-sm-12 row">
+                <label class="col-3 col-form-label text-center" for="governorate">الولاية</label>
+                <div class="col-lg-8 col-md-9 col-sm-6">
                     <input class="form-control-sm form-control" formControlName="governorate" id="governorate"
                            type="text">
                 </div>
             </div>
-            <div class="mb-sm-2 form-group align-self-center col-lg-3 col-md-6 col-sm-12 row">
-                <label class="col-4 col-form-label" for="delegation">المعتمدية</label>
-                <div class="col-8">
+            <div class="mb-sm-2 form-group align-self-center col-lg-4 col-md-6 col-sm-12 row">
+                <label class="col-3 col-form-label text-center" for="delegation">المعتمدية</label>
+                <div class="col-lg-8 col-md-9 col-sm-6">
                     <input class="form-control-sm form-control" formControlName="delegation" id="delegation"
                            type="text">
                 </div>
             </div>
-            <div class="mb-sm-2 form-group align-self-center col-lg-3 col-md-6 col-sm-12 row">
-                <label class="col-7 col-form-label" for="zipCode">الترقيم البريدي</label>
-                <div class="col-5">
+            <div class="mb-sm-2 form-group align-self-center col-lg-4 col-md-6 col-sm-12 row">
+                <label class="col-6 col-form-label text-center" for="zipCode">الترقيم البريدي</label>
+                <div class="col-lg-8 col-md-9 col-sm-6">
                     <input class="form-control-sm  form-control" formControlName="zipCode" id="zipCode" type="text">
                 </div>
             </div>
         </div>
     </div>
     <div class="col-sm-12 col-md-10 col-lg-6 row form-group mt-4">
-        <label class="col-lg-4 col-md-3 col-sm-6 col-form-label-sm text-center" for="email">البريد اﻹلكتروني</label>
-        <div class="col-lg-8 col-md-9 col-sm-6">
-            <input class="form-control-sm form-control" formControlName="email" id="email" type="text">
+        <label class="col-lg-4 col-md-3 col-sm-4 col-form-label-sm text-center" for="email">البريد اﻹلكتروني</label>
+        <div class="col-lg-8 col-md-9 col-sm-8">
+            <input class="form-control-sm form-control" formControlName="email" id="email" type="email">
         </div>
     </div>
     <div class="d-flex justify-content-around">
-        <button [disabled]="formGroup.invalid" class="btn btn-success w-50 mt-4 m-auto" type="submit">تغيير معطيات الحساب</button>
-        <button class="btn btn-danger w-50 mt-4 m-auto" type="submit" *ngIf="typeUser !== 'admin'">فسخ الحساب</button>
+        <button [disabled]="formGroup.invalid" class="btn btn-success w-25 mt-4 m-auto" type="submit">تغيير معطيات
+            الحساب
+        </button>
+        <button *ngIf="typeUser !== 'admin'" class="btn btn-danger w-25 mt-4 m-auto" type="submit">فسخ الحساب</button>
     </div>
 </form>
-<form class="row g-3" (ngSubmit)="changePassword($event)" [formGroup]="changePasswordForm" *ngIf="typeUser !== 'admin'">
-  <div class="col-auto">
-    <label for="staticEmail2" class="visually-hidden">Email</label>
-    <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="email@example.com">
-  </div>
-  <div class="col-auto">
-    <label for="inputPassword2" class="visually-hidden">Password</label>
-    <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
-  </div>
-  <div class="col-auto">
-    <button type="submit" class="btn btn-primary mb-3">Confirm identity</button>
-  </div>
+<h1 class="h1 text-center text-danger mt-4">تغيير كلمة السر</h1>
+<form (ngSubmit)="changePassword($event)" [formGroup]="changePasswordForm"
+      class="row g-3 mt-2 container">
+    <div class="mb-3 col-md-6 col-sm-12 row">
+        <label class="col-sm-5 col-form-label" for="current">كلمة السر الحالية</label>
+        <div class="col-sm-7">
+            <input class="form-control" formControlName="current" id="current" name="current" type="password">
+        </div>
+    </div>
+    <div class="mb-3 col-md-6 col-sm-12 row">
+        <label class="col-sm-5 col-form-label" for="new">كلمة السر الجديدة</label>
+        <div class="col-sm-7">
+            <input class="form-control" formControlName="new" id="new" name="new" type="password">
+        </div>
+    </div>
+    <div class="mb-3 col-md-6 col-sm-12 row">
+        <label class="col-sm-5 col-form-label" for="confirm">تأكيد كلمة السر الجديدة</label>
+        <div class="col-sm-7">
+            <input class="form-control" formControlName="new" id="confirm" name="confirm" type="password">
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <button class="btn btn-success mb-3" type="submit">تغيير</button>
+    </div>
 </form>

@@ -37,10 +37,8 @@ export class FormIdComponent implements OnInit {
     async submit(event: Event): Promise<void> {
         event.preventDefault();
         saveDataToLocalhost(this.formGroup.value);
-        console.log(this.formGroup.value);
         if (this.typeUser === 'teacher' && this.step === 2 || this.typeUser === 'parent' && this.step === 3) {
             const patientData = localStorage.getItem('patient');
-            console.log(patientData);
             if (patientData !== null) {
                 const patient: Patient = JSON.parse(patientData);
                 const dreamer = localStorage.getItem('dreamer');
@@ -187,7 +185,7 @@ export class FormIdComponent implements OnInit {
                     const name = localStorage.getItem('name');
                     const typeUser = localStorage.getItem('typeUser');
                     localStorage.clear();
-                    if (userId !== null && access !== null && refresh !== null && typeUser !== null && name !== null) {
+                    if (userId !== null && access !== null && refresh !== null && typeUser !== null && name !== null && patient !== null) {
                         localStorage.setItem('userId', userId);
                         localStorage.setItem('access', access);
                         localStorage.setItem('refresh', refresh);

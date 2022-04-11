@@ -33,8 +33,9 @@ export class DynamicTableCrud<T> {
     }
 
     delete(id: number | undefined, index: number): void {
+        console.log(id);
         if (id !== undefined) {
-            this.service.delete(this.actionUrl, id, this.options).then(async (response: void) => {
+            this.service.delete(this.actionUrl, id, this.options).then(async () => {
                 this.data.splice(index, 1);
                 this.numberItems--;
             });

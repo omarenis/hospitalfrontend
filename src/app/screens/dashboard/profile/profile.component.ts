@@ -26,6 +26,10 @@ export class ProfileComponent implements OnInit {
     ngOnInit(): void {
         const access = localStorage.getItem('access');
         const userId: number = Number(localStorage.getItem('userId'));
+        const typeUser = localStorage.getItem('typeUser');
+        if( typeUser !== null){
+            this.typeUser = typeUser;
+        }
         if (access !== null)
         {
             this.token = this.secureStorageService.getToken(access);
@@ -36,7 +40,7 @@ export class ProfileComponent implements OnInit {
             telephone: new FormControl(this.telephone, [Validators.required]),
             loginNumber: new FormControl(this.loginNumber, [Validators.required]),
         });
-        if (this.typeUser !== 'admin' && this.typeUser !== 'school'){
+        if (this.typeUser !== 'admin' && this.typeUser !== 'superdoctor'){
             this.formGroup.addControl('governorate', new FormControl( '', [Validators.required]));
             this.formGroup.addControl('delegation', new FormControl( ''));
             this.formGroup.addControl('zipCode', new FormControl( '', [Validators.required]));
@@ -49,17 +53,19 @@ export class ProfileComponent implements OnInit {
                 Authorization: `Bearer ${this.token}`
             }
         }).then((response: Person) => {
-            console.log(response);
             this.formGroup.setValue({
                 loginNumber: response.loginNumber,
                 name: response.name,
                 email: response.email,
                 telephone: response.telephone,
                 familyName: response?.familyName,
-                governorate: response?.localisation?.governorate,
-                delegation: response.localisation?.delegation,
-                zipCode: response.localisation?.zipCode
             });
+            if (this.typeUser !== 'admin')
+            {
+                this.formGroup.controls.governorate.setValue(response.localisation?.governorate);
+                this.formGroup.controls.delegation.setValue(response.localisation?.delegation);
+                this.formGroup.controls.zipCode.setValue(response.localisation?.zipCode);
+            }
         });
         this.changePasswordForm = new FormGroup({
             current: new FormControl('', [Validators.required]),
@@ -86,6 +92,6 @@ export class ProfileComponent implements OnInit {
 
     changePassword($event: Event): void {
         $event.preventDefault();
-
+        console.log(this.changePasswordForm.value);
     }
 }

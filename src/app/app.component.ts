@@ -3,7 +3,7 @@ import {LoginSignupService} from './services/login-signup.service';
 import {Router} from '@angular/router';
 import {DomSanitizer} from '@angular/platform-browser';
 import {SecureStorageService} from './services/secure-storage.service';
-import {ConnectionService} from './services/connection.service';
+import {Connection, ConnectionService} from './services/connection.service';
 import {isPlatformBrowser} from '@angular/common';
 @Component({
     selector: 'app-root',
@@ -39,8 +39,12 @@ export class AppComponent implements OnInit {
             this.public = this.typeUser === null || this.typeUser === 'parent' || this.typeUser === 'teacher';
         }
         this.show = !this.public;
-        this.connection.connected$.subscribe((connection: boolean) => {
-            this.connected = connection;
+        this.connection.connected$.subscribe((connection: Connection) => {
+            this.connected = true;
+            this.typeUser = connection.typeUser;
+            this.shown = connection.typeUser !== 'parent' && connection.typeUser !== 'teacher';
+            this.public  = connection.typeUser === null || connection.typeUser === 'parent' || connection.typeUser === 'teacher';
+            this.show = !this.public;
         });
     }
 
