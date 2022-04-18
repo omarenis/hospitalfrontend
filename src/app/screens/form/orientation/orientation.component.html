@@ -1,3 +1,3 @@
-<div class="alert alert-success text-center" role="alert">
-  شكرا لإستعمالك المنصّة {{isSick !== undefined && isSick !== true ? 'سوف نحدد موعد لك و لطفلك' : 'طفلك سليم'}}
-</div>
+<h1 class="alert alert-success text-center h1">
+  شكرا لإستعمالك المنصّة {{isSick !== undefined && isSick === true ? 'سوف نحدد موعد لك و لطفلك' : (isSick === false ? 'طفلك سليم': ('ننتظر تكملة إستمارة ' + (scoreTeacher === 0 ? 'المربي' : 'الولي') ))}}
+</h1>

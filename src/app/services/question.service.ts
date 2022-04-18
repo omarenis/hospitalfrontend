@@ -212,18 +212,18 @@ export class QuestionService {
         },
         {
             id: 41,
-            label: 'يشكو من آلام جسدية مختلفة',
-            formControlName: 'physicalAches',
-        },
-        {
-            id: 42,
             label: 'يشكو من الام في المعدة',
             formControlName: 'upsetStomach',
         },
         {
-            id: 43,
+            id: 42,
             label: 'يشكو من صعوبات في النوم لا ينام بسهولة يفيق باكرا جدا ينهض اثناء اليل',
             formControlName: 'sleepingProblems',
+        },
+        {
+            id: 43,
+            label: 'يشكو من آلام جسدية مختلفة',
+            formControlName: 'physicalAches',
         },
         {
             id: 44,

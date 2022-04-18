@@ -5,6 +5,8 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {SecureStorageService} from './services/secure-storage.service';
 import {Connection, ConnectionService} from './services/connection.service';
 import {isPlatformBrowser} from '@angular/common';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../environments/environment';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -26,7 +28,7 @@ export class AppComponent implements OnInit {
     public = false;
     constructor(private loginService: LoginSignupService, private router: Router, private domSanitizer: DomSanitizer,
                 private secureStorageService: SecureStorageService, private connection: ConnectionService,
-                @Inject(PLATFORM_ID) private platformId: any) {
+                @Inject(PLATFORM_ID) private platformId: any, private httpClient: HttpClient) {
     }
 
     ngOnInit(): void {
@@ -74,5 +76,8 @@ export class AppComponent implements OnInit {
                 this.router.navigate(['/']);
             }).catch((error) => console.log(error));
         }
+    }
+    async clearData(): Promise<void>{
+        return this.httpClient.delete<void>(`${environment.url}/delete_data`).toPromise();
     }
 }

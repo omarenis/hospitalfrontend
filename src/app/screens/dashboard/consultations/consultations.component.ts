@@ -60,7 +60,7 @@ export class ConsultationsComponent extends DynamicTableCrud<RendezVous> impleme
                 this.options.params = {parent_id: Number(userId)};
                 await this.getData();
             }
-            this.parentService.list(`${environment.url}/api/persons/parents`, {
+            this.parentService.list(`${environment.url}/api/persons`, {
                 params: {
                     typeUser: this.typeUser === 'parent' ? 'doctor' : 'parent',
                     patient__supervise__accepted: true,

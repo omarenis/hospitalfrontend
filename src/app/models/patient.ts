@@ -36,4 +36,7 @@ export interface Patient {
     hyperActivityTroubleTeacher?: HyperactivityTroubleTeacher;
     impulsivityTroubleTeacher?: ImpulsivityTroubleTeacher;
     inattentionTroubleTeacher?: InattentionTroubleTeacher;
+    scoreParent: number;
+    isSupervised: boolean;
+    scoreTeacher: number;
 }

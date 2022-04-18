@@ -125,7 +125,7 @@
                     <a class="nav-link text-white align-effect p-2" routerLink="/signup">انضم الينا</a>
                 </li>
                 <li class="nav-item pe-auto">
-                    <a class="nav-link text-white align-effect mt-1" routerLink="landing/join">للمشاركة</a>
+                    <a class="nav-link text-white align-effect mt-1" routerLink="{{connected ? '/landing/join' : '/login'}}">للمشاركة</a>
                 </li>
                 <li class="nav-item mt-5">
                     <a class="nav-link text-white align-effect p-2" routerLink="landing/news">أخبارنا</a>
@@ -144,8 +144,7 @@
                     <a class="nav-link text-white align-effect p-2" href="#">المؤتمرات</a>
                 </li>
                 <li *ngIf="!connected" class="nav-item me-0 pe-auto">
-                    <a class="nav-link text-white p-2" data-bs-target="#signInModal" data-bs-toggle="modal"
-                       type="button">تسجيل
+                    <a class="nav-link text-white p-2" routerLink="/login" type="button">تسجيل
                         الدخول</a>
                 </li>
                 <li *ngIf="connected" class="d-flex me-auto dropdown">
@@ -235,7 +234,7 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link text-center" href="#">
+                        <a class="sidebar-link text-center" routerLink="/landing/events">
                             <span>المؤتمرات</span>
                         </a>
                     </li>

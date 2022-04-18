@@ -144,10 +144,9 @@ export class FormIdComponent implements OnInit {
                 } else if (this.typeUser === 'teacher') {
                     patient.behaviorTroubleTeacher =
                         {
-                            immediatelySatisfiedNeeds, angryUnexpectedBehavior, sensitiveCriticism, poutSulkEasily, moody, brawler,
-                            denyMistakesBlameOthers, lessAskTeacherHelp
-                        }
-                    ;
+                            immediatelySatisfiedNeeds, angryUnexpectedBehavior, sensitiveCriticism, poutSulkEasily, moody,
+                            brawler, denyMistakesBlameOthers, lessAskTeacherHelp
+                        };
                     patient.extraTroubleTeacher = {
                         submissiveAttitudeTowardsAuthority,
                         lessAcceptedByGroup,
@@ -177,6 +176,7 @@ export class FormIdComponent implements OnInit {
                 if (access) {
                     access = this.secureStorageService.getToken(access);
                 }
+                console.log(patient);
                 this.patientService.create(`${environment.url}/api/patients`, patient, {headers: {Authorization: `Bearer ${access}`}}
                 ).then(async (response: Patient) => {
                     const userId = localStorage.getItem('userId');
@@ -193,10 +193,9 @@ export class FormIdComponent implements OnInit {
                         localStorage.setItem('typeUser', typeUser);
                     }
                     await this.router.navigate([`/landing/orientation/${response.id}`]);
-                })
-                    .catch((error) => {
-                        console.error(error);
-                    });
+                }).catch((error) => {
+                    console.error(error);
+                });
             }
         } else {
             await this.router.navigate([`/form/${this.typeUser}/${this.step + 1}`]);

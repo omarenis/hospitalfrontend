@@ -7,7 +7,7 @@ export interface Person {
     typeUser: string;
     school_id ?: string | null;
     familyName ?: string | null;
-    speciality?: string;
+    speciality ?: string;
     is_super ?: boolean;
     email?: string;
     super_doctor_id ?: string | null;

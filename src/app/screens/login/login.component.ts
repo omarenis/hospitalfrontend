@@ -40,11 +40,16 @@ export class LoginComponent implements OnInit {
             response.refresh = this.secureStorageService.setToken(response.refresh);
             saveDataToLocalhost(response);
             let url: string;
-            if (response.typeUser === 'doctor' || response.typeUser === 'superdoctor') {
+            if (response.typeUser !== 'admin' && response.typeUser !== 'parent' && response.typeUser !== 'teacher')
+            {
                 url = '/dashboard/patients';
-            } else if (response.typeUser === 'admin') {
+            }
+            else if (response.typeUser === 'admin')
+            {
                 url = '/dashboard/users';
-            } else {
+            }
+            else
+            {
                 url = 'landing/join';
             }
             this.connection.setConnection({

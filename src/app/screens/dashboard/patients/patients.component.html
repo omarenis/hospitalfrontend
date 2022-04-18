@@ -1,5 +1,5 @@
 <h1 class="card-header text-center text-white h-25 border-0 h1" style="background-color: #6c757d">
-     {{typeUser === 'parent' ? 'قائمة الاطفال المسجلين' : 'قائمة المرضى'}}
+    {{typeUser === 'parent' ? 'قائمة الاطفال المسجلين' : 'قائمة المرضى'}}
 </h1>
 <section class="container">
     <div class="d-flex mt-1 justify-content-start">
@@ -39,9 +39,6 @@
                 <tbody>
                 <tr *ngFor="let patient of data; let i = index">
                     <td class="text-center">
-                        {{patient.id}}
-                    </td>
-                    <td class="text-center">
                         {{patient.name}}
                     </td>
                     <td class="text-center">
@@ -49,12 +46,12 @@
                     </td>
                     <td class="text-center">
                         {{patient.birthdate}}
-<!--                    </td>-->
-<!--                    <td class="text-center">-->
-<!--                        {{patient.school}}-->
-<!--                    </td>-->
                     </td>
                     <td class="buttons d-flex justify-content-end align-items-center">
+                        <button (click)="selectPatient(i)" class="btn btn-primary" data-bs-target="#exampleModal"
+                                data-bs-toggle="modal" type="button">
+
+                        </button>
                         <a *ngIf="patient.id" class="btn btn-sm btn-outline-primary align-self-center"
                            routerLink="/dashboard/patients/{{patient.id}}" style="width: 42px; height: 35px">
                             <em class="material-icons">visibility</em>
@@ -76,3 +73,50 @@
         </div>
     </div>
 </section>
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div aria-hidden="true" #superviseModel aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">قائمة الأطباء</h5>
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table caption-top">
+                    <caption></caption>
+                    <thead>
+                    <tr>
+                        <th scope="col" class="text-center">إسم الطبيب</th>
+                        <th scope="col" class="text-center">لقب الطبيب</th>
+                        <th scope="col" class="text-center">البريد الإلكتروني للطبيب</th>
+                        <th scope="col" class="text-center">هاتف الطبيب</th>
+                        <th scope="col">إختصاص الطبيب</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let doctor of doctors">
+                        <td class="text-center">{{doctor.name}}</td>
+                        <td class="text-center">{{doctor.familyName}}</td>
+                        <td class="text-center">{{doctor.email}}</td>
+                        <td class="text-center">{{doctor.telephone}}</td>
+                        <td class="text-center">{{doctor.speciality}}</td>
+                        <td class="buttons d-flex justify-content-end align-items-center" *ngIf="typeUser === 'superdoctor'">
+                            <button class="btn" [ngClass]="{'btn-danger': this.patient.supervise?.doctor === doctor.id
+                            && this.patient.supervise?.accepted === true, 'btn-success': this.patient.supervise?.doctor !== doctor.id}"
+                                    [disabled]="this.patient.supervise?.doctor === doctor.id && this.patient.supervise?.accepted === true"
+                                    (click)="addSupervise(doctor.id, $event)">
+                                {{this.patient.supervise?.doctor === doctor.id && this.patient.supervise?.accepted === true ? 'لقد تم تعيين هذا الطبيب بالفعل' : 'تعيين الطبيب '}}
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

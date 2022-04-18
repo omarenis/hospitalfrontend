@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
 import {AppComponent} from './app.component';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
@@ -155,7 +154,6 @@ const routes: Routes = [
         UsersComponent,
         FormIdComponent,
         OrientationComponent,
-        PatientComponent,
         LandingComponent,
         AboutComponent,
         HomeComponent,
@@ -166,7 +164,8 @@ const routes: Routes = [
         SignupComponent,
         DiagnosticComponent,
         LoginComponent,
-        DashboardComponent
+        DashboardComponent,
+        PatientComponent
     ],
     imports: [
         BrowserModule.withServerTransition({appId: 'serverApp'}),
@@ -192,5 +191,4 @@ const routes: Routes = [
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule {}
