@@ -78,7 +78,7 @@ export class QuestionService {
         },
         {
             id: 14,
-            label: 'متلث مخرب',
+            label: 'متلف مخرب',
             formControlName: 'destructive'
         },
         {

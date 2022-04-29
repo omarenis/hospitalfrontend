@@ -1,8 +1,8 @@
 <div class="container w-responsive">
-    <div class="alert text-center" style="font-size: 20px" role="alert" [ngClass]="{'alert-success': !sick, 'alert-danger': sick}">
+    < <div *ngIf="typeUser === 'superdoctor' || typeUser=== 'parent' " class="alert text-center" style="font-size: 20px" role="alert" [ngClass]="{'alert-success': !sick, 'alert-danger': sick}">
        هذا الطفل {{sick ? 'مريض' : 'سليم'}}
     </div>
-    <h1 class="h1 text-center">المعطيات الخاصة {{typeUser === 'parent' ? 'للطفل' : 'للمريض'}}</h1>
+    <h1 class="h1 text-center">المعطيات الخاصة {{typeUser === 'parent' ? 'للطفل' : 'للطفل'}}</h1>
     <form [formGroup]="formGroup"
           class="container-lg container-fluid m-lg-auto row mt-4 p-sm-0">
         <div class="col-sm-12 col-md-10 col-lg-6 row form-group mt-4">
@@ -24,13 +24,13 @@
                 <input class="col-3 form-control-sm form-control" formControlName="birthdate" id="birthdate"
                        type="date">
             </div>
-        </div>
-        <div class="col-sm-12 col-md-10 col-lg-6 row form-group mt-4">
+        </div> <div class="col-sm-12 col-md-10 col-lg-6 row form-group mt-4">
             <label class="col-lg-4 col-md-3 col-sm-6 col-form-label-sm text-center" for="school">المدرسة </label>
             <div class="col-lg-8 col-md-9 col-sm-6">
                 <input class="form-control-sm form-control" formControlName="school" id="school" type="text">
             </div>
         </div>
+
         <div *ngIf="!canEdit" class="col-sm-12 col-md-10 col-lg-6 row form-group mt-4">
             <label class="col-lg-4 col-md-3 col-sm-6 col-form-label-sm text-center" for="parentName">إسم الولي</label>
             <div class="col-lg-8 col-md-9 col-sm-6">
@@ -67,7 +67,7 @@
             <button class="btn btn-danger w-25 mt-4 m-auto" type="submit">فسخ {{typeUser === 'parent' ? 'الطفل' : 'المريض'}}</button>
         </div>
     </form>
-    <h1 class="h1 text-center mt-5">المعطيات العامة {{typeUser === 'parent' ? 'للطفل' : 'للمريض'}}</h1>
+    <h1 class="h1 text-center mt-5">المعطيات العامة {{typeUser === 'parent' ? 'للطفل' : 'للطفل'}}</h1>
     <div class="container-fluid p-0">
         <app-responses [canUpdate]="canEdit" [responses]="responses"></app-responses>
     </div>

@@ -1,5 +1,5 @@
 <h1 class="card-header text-center text-white h-25 border-0 h1" style="background-color: #6c757d">
-    {{typeUser === 'parent' ? 'قائمة الاطفال المسجلين' : 'قائمة المرضى'}}
+    {{typeUser === 'parent' ? 'قائمة الاطفال المسجلين' : 'قائمة الاطفال'}}
 </h1>
 <section class="container">
     <div class="d-flex mt-1 justify-content-start">
@@ -12,7 +12,7 @@
                         </div>
                     </div>
                     <div class="col-md-8">
-                        <h6 class="text-muted font-semibold">{{typeUser === 'parent' ? 'الاطفال' : 'المرضى'}}</h6>
+                        <h6 class="text-muted font-semibold">{{typeUser === 'parent' ? 'الاطفال' : 'الاطفال'}}</h6>
                         <h6 class="font-extrabold mb-0">{{numberPatients}}</h6>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                         {{patient.birthdate}}
                     </td>
                     <td class="buttons d-flex justify-content-end align-items-center">
-                        <button (click)="selectPatient(i)" class="btn btn-primary" data-bs-target="#exampleModal"
+                        <button *ngIf="typeUser === 'superdoctor'" (click)="selectPatient(i)" class="btn btn-primary" data-bs-target="#exampleModal"
                                 data-bs-toggle="modal" type="button">
 
                         </button>

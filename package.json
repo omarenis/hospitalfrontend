@@ -26,6 +26,7 @@
     "@angular/router": "~11.2.13",
     "@angular/service-worker": "~11.2.13",
     "@nguniversal/express-engine": "^11.2.1",
+    "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
     "express": "^4.15.2",
     "rxjs": "~6.6.0",
