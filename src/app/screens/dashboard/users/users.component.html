@@ -66,6 +66,7 @@
         <td class="text-center">{{person.loginNumber}}</td>
         <td class="text-center">{{person.name}}</td>
         <td *ngIf="typeUser !== 'admin'" class="text-center">{{person.familyName}}</td>
+        <td *ngIf="typeUser === 'superdoctor'" class="text-center">{{person.speciality}}</td>
         <td class="ltr-text text-center">{{person.telephone}}</td>
         <td class="text-center">{{person.email}}</td>
         <td *ngIf="typeUser === 'admin'" class="text-center">
